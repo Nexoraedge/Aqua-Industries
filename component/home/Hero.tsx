@@ -35,7 +35,7 @@ const Hero = ({ scrollY = 0 }: { scrollY?: number }) => {
                 style={{ backgroundImage: "url('/hero_bg_adhesive.png')" }}
             />
             <div className="absolute inset-0 z-0 bg-gradient-navy opacity-80" />
-            <div className="absolute inset-0 z-0 bg-gradient-to-t from-brand-950 via-transparent to-transparent" />
+            <div className="absolute inset-0 z-0 bg-gradient-to-t from-gray-700 via-transparent to-transparent" />
 
             <div className="max-w-[1440px] w-full mx-auto px-6 sm:px-12 relative z-10 grid grid-cols-1 lg:grid-cols-12 gap-16 items-center">
 
