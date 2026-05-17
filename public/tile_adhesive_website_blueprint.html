@@ -1,0 +1,103 @@
+
+<style>
+  .root { padding: 1.5rem 0; font-family: var(--font-sans); }
+  .page-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(180px, 1fr)); gap: 12px; margin-bottom: 2rem; }
+  .page-card { background: var(--color-background-primary); border: 0.5px solid var(--color-border-tertiary); border-radius: var(--border-radius-lg); padding: 1rem 1.1rem; cursor: pointer; transition: border-color 0.15s; }
+  .page-card:hover { border-color: var(--color-border-secondary); }
+  .page-card.active { border: 2px solid #1D9E75; }
+  .page-num { font-size: 11px; font-weight: 500; color: var(--color-text-tertiary); margin-bottom: 4px; }
+  .page-title { font-size: 14px; font-weight: 500; color: var(--color-text-primary); margin-bottom: 4px; }
+  .page-badge { display: inline-block; font-size: 11px; padding: 2px 8px; border-radius: 20px; margin-top: 4px; }
+  .badge-must { background: #E1F5EE; color: #0F6E56; }
+  .badge-seo { background: #E6F1FB; color: #185FA5; }
+  .badge-trust { background: #FAEEDA; color: #854F0B; }
+  .detail-panel { background: var(--color-background-secondary); border-radius: var(--border-radius-lg); padding: 1.25rem 1.5rem; margin-bottom: 2rem; min-height: 120px; }
+  .detail-title { font-size: 16px; font-weight: 500; color: var(--color-text-primary); margin-bottom: 0.75rem; }
+  .section-list { list-style: none; padding: 0; margin: 0; display: grid; grid-template-columns: repeat(auto-fill, minmax(200px, 1fr)); gap: 8px; }
+  .section-item { font-size: 13px; color: var(--color-text-secondary); padding: 6px 10px; background: var(--color-background-primary); border-radius: var(--border-radius-md); border: 0.5px solid var(--color-border-tertiary); }
+  .section-item::before { content: "→ "; color: #1D9E75; font-weight: 500; }
+  .legend { display: flex; gap: 16px; flex-wrap: wrap; margin-bottom: 1.25rem; }
+  .leg-item { display: flex; align-items: center; gap: 6px; font-size: 12px; color: var(--color-text-secondary); }
+  .leg-dot { width: 10px; height: 10px; border-radius: 50%; }
+  .hint { font-size: 12px; color: var(--color-text-tertiary); margin-top: 1rem; text-align: center; }
+  .seo-box { background: var(--color-background-primary); border-left: 3px solid #1D9E75; border-radius: 0 var(--border-radius-md) var(--border-radius-md) 0; padding: 0.75rem 1rem; margin-top: 0.75rem; font-size: 13px; color: var(--color-text-secondary); }
+</style>
+<div class="root">
+  <h2 style="sr-only">Tile Adhesive Business Website Blueprint</h2>
+  <div class="legend">
+    <div class="leg-item"><div class="leg-dot" style="background:#1D9E75"></div> Must Have</div>
+    <div class="leg-item"><div class="leg-dot" style="background:#185FA5"></div> SEO Priority</div>
+    <div class="leg-item"><div class="leg-dot" style="background:#854F0B"></div> Trust Builder</div>
+  </div>
+  <div class="page-grid" id="pageGrid"></div>
+  <div class="detail-panel" id="detailPanel">
+    <div class="detail-title" id="detailTitle">Click any page to see its sections</div>
+    <ul class="section-list" id="sectionList"></ul>
+    <div class="seo-box" id="seoTip" style="display:none"></div>
+  </div>
+  <p class="hint">Click each page card to explore sections</p>
+</div>
+<script>
+const pages = [
+  {
+    num:"01", title:"Home",badge:"must",badgeLabel:"Must Have",
+    sections:["Hero banner with tagline + CTA","Product range highlights","Why Choose Us (3–4 points)","Certifications & ISO badges","Client logos / brands used","Testimonials preview","Coverage areas (Rajasthan/Pan-India)","WhatsApp quick inquiry button"],
+    seo:"Target: 'tile adhesive manufacturer Jaipur', 'tile adhesive supplier Rajasthan'"
+  },
+  {
+    num:"02", title:"Products",badge:"must",badgeLabel:"Must Have",
+    sections:["Product category cards (Wall, Floor, Heavy Duty)","Each product: name, description, tech specs","Coverage area per kg","Application guide thumbnail","Downloadable TDS (Technical Data Sheet)","Packaging sizes & SKUs","'Request Quote' button per product"],
+    seo:"Target: 'white cement tile adhesive', 'epoxy tile grout', 'floor tile adhesive price'"
+  },
+  {
+    num:"03", title:"About Us",badge:"trust",badgeLabel:"Trust Builder",
+    sections:["Factory story & founding year","Manufacturing capacity","Team/founder photo","Quality control process","ISO / BIS certifications","Vision & mission statement","Pan-India reach map"],
+    seo:"Builds E-E-A-T signals (Experience, Expertise, Authority, Trust) for Google"
+  },
+  {
+    num:"04", title:"Why Us",badge:"seo",badgeLabel:"SEO Priority",
+    sections:["Comparison table vs competitors","Factory-direct pricing advantage","Custom formulation option","Fast delivery timelines","Bulk/B2B pricing tiers","Technical support offered","Certifications & lab testing proof"],
+    seo:"Target: 'best tile adhesive brand India', 'tile adhesive wholesale Jaipur'"
+  },
+  {
+    num:"05", title:"Applications",badge:"seo",badgeLabel:"SEO Priority",
+    sections:["Swimming pools","Large format tiles","Exterior facades","Heated floors","Marble & natural stone","Commercial flooring","Before/after project photos"],
+    seo:"Each application can be a separate page — massive SEO surface area"
+  },
+  {
+    num:"06", title:"Certifications",badge:"trust",badgeLabel:"Trust Builder",
+    sections:["ISO 9001 certificate scan","BIS mark details","Lab test reports","REACH / VOC compliance","Eco-friendly claims (if any)","Award or recognition logos"],
+    seo:"Boosts trust signals — key for B2B buyers who verify before bulk orders"
+  },
+  {
+    num:"07", title:"Blog / Resources",badge:"seo",badgeLabel:"SEO Priority",
+    sections:["How to apply tile adhesive (step-by-step)","Tile adhesive vs white cement","How much adhesive per sq ft?","Common tiling mistakes","Product comparison guides","Video tutorials embed","FAQs section"],
+    seo:"Long-tail SEO goldmine — drives free organic traffic from contractors & builders"
+  },
+  {
+    num:"08", title:"Contact & Inquiry",badge:"must",badgeLabel:"Must Have",
+    sections:["Multi-field inquiry form (name, city, requirement)","WhatsApp chat button","Factory address + Google Map embed","Phone & email","Dealer/distributor inquiry option","Response time promise","Social media links"],
+    seo:"Add 'tile adhesive supplier [city]' pages for each target market"
+  },
+];
+const grid = document.getElementById('pageGrid');
+const detailTitle = document.getElementById('detailTitle');
+const sectionList = document.getElementById('sectionList');
+const seoTip = document.getElementById('seoTip');
+let active = null;
+pages.forEach((p,i) => {
+  const card = document.createElement('div');
+  card.className = 'page-card';
+  card.innerHTML = `<div class="page-num">Page ${p.num}</div><div class="page-title">${p.title}</div><span class="page-badge badge-${p.badge}">${p.badgeLabel}</span>`;
+  card.addEventListener('click', () => {
+    if(active) active.classList.remove('active');
+    card.classList.add('active');
+    active = card;
+    detailTitle.textContent = p.title + ' — Sections';
+    sectionList.innerHTML = p.sections.map(s => `<li class="section-item">${s}</li>`).join('');
+    seoTip.style.display = 'block';
+    seoTip.innerHTML = '<strong style="color:var(--color-text-primary)">SEO note:</strong> ' + p.seo;
+  });
+  grid.appendChild(card);
+});
+</script>
