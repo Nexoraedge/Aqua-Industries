@@ -45,11 +45,11 @@ body {
   width: 0px;
   height: 0px;
 }
-::-webkit-scrollbar{
+::-webkit-scrollbar {
   width: 0px;
   height: 0px;
 }
-::webkit-scrollbar-thumb{
+::-webkit-scrollbar-thumb {
   width: 0px;
   height: 0px;
 }

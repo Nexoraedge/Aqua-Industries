@@ -109,7 +109,7 @@ export default function Navbar() {
               className="relative z-60 flex items-center group"
             >
               <img
-                src="/aquo-logo.png"
+                src={isScrolled && !isOpen ? "/aquo-logo.png" : "/assest/Logo-aqua-white.png"}
                 alt="Aqua Stone Logo"
                 className={`h-8 sm:h-10 w-auto object-contain transition-all duration-500 group-hover:scale-105 ${isOpen ? "brightness-100 opacity-95" : "opacity-100"
                   }`}
@@ -125,19 +125,19 @@ export default function Navbar() {
               <span
                 className={`block h-[2px] rounded-full transition-all duration-300 ease-out  transform origin-right ${isOpen
                   ? "bg-white w-8 -rotate-45 -translate-x-[2px] -translate-y-[1px]"
-                  : "bg-brand-600 w-4"
+                  : (isScrolled ? "bg-brand-600 w-4" : "bg-white w-4")
                   } group-hover:bg-brand-500 group-hover:w-8`}
               />
               <span
                 className={`block h-[2px] rounded-full transition-all duration-300 ease-out ${isOpen
                   ? "bg-white opacity-0 w-8"
-                  : "bg-brand-600 w-6"
+                  : (isScrolled ? "bg-brand-600 w-6" : "bg-white w-6")
                   } group-hover:bg-brand-500 group-hover:w-8`}
               />
               <span
                 className={`block h-[2px] rounded-full transition-all duration-300 ease-out transform origin-right ${isOpen
                   ? "bg-white w-7 rotate-45 -translate-x-[2px] translate-y-[1px]"
-                  : "bg-brand-600 w-8"
+                  : (isScrolled ? "bg-brand-600 w-8" : "bg-white w-8")
                   } group-hover:bg-brand-500`}
               />
             </button>

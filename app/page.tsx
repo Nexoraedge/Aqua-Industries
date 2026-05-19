@@ -18,6 +18,7 @@ import Patta from "@/component/home/Patta";
 import Manufacturing_Highlights from "@/component/home/Manufacturing_Highlights";
 import Product_Interface from "@/component/home/Product_Interface";
 import Category_Showcase from "@/component/home/Category_Showcase";
+import Product_Lineup_Poster from "@/component/home/Product_Lineup";
 import Estimation_tools from "@/component/home/Estimation_tools";
 import Trust_Builder from "@/component/home/Trust_Builder";
 import CTA from "@/component/home/CTA";
@@ -60,12 +61,15 @@ export default function Home() {
 
       {/* ================= THE CORE QUARTET PRODUCT INTERFACE ================= */}
       <Product_Interface />
-      
+
       {/* ================= COMPLETE SYSTEMS & CATEGORY SHOWCASE ================= */}
       <Category_Showcase />
 
       {/* ================= INDUSTRIAL MANUFACTURING HIGHLIGHTS ================= */}
       <Manufacturing_Highlights />
+      {/* ================= PRODUCT LINEUP POSTER ================= */}
+      <Product_Lineup_Poster />
+
       {/* ================= AUTOMATED ARCHITECTURAL SPECIFICATION INTERFACE ================= */}
       <Estimation_tools />
       {/* ================= COMPLIANCE & AUTHORITATIVE TRUST ECOSYSTEM ================= */}

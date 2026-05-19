@@ -37,7 +37,7 @@ export default function ContactPage() {
         <div className="lg:col-span-5 space-y-8">
           <div className="bg-white rounded-3xl p-8 shadow-premium border border-slate-150">
             <h3 className="font-serif text-2xl font-bold text-brand-950 mb-6">Corporate Office &amp; Plant</h3>
-            
+
             <ul className="space-y-6">
               <li className="flex items-start gap-4">
                 <div className="w-10 h-10 rounded-full bg-brand-50 flex items-center justify-center shrink-0 text-brand-600">
@@ -46,7 +46,7 @@ export default function ContactPage() {
                 <div>
                   <h4 className="text-xs font-bold uppercase text-slate-800 tracking-wider mb-1">Location</h4>
                   <p className="text-sm text-slate-600 font-light leading-relaxed">
-                    Aqua Stone Company<br />
+                    Aqua Stone Industries<br />
                     Plot No. 42-45, Industrial Area Phase II<br />
                     Mansarovar, Jaipur, Rajasthan - 302020
                   </p>
@@ -107,7 +107,7 @@ export default function ContactPage() {
               <p className="text-sm text-emerald-700 font-light mb-6">
                 Thank you for reaching out to Aqua Stone. One of our factory representatives will contact you shortly regarding your quotation.
               </p>
-              <button 
+              <button
                 onClick={() => setFormStatus("idle")}
                 className="bg-emerald-600 hover:bg-emerald-700 text-white px-6 py-3 rounded-full text-xs font-bold uppercase tracking-wider transition-colors"
               >

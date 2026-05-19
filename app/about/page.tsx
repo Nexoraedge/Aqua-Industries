@@ -1,12 +1,12 @@
 import React from "react";
 import Link from "next/link";
-import { 
-  Building2, 
-  Cpu, 
-  ShieldCheck, 
-  MapPin, 
-  ArrowRight, 
-  Award, 
+import {
+  Building2,
+  Cpu,
+  ShieldCheck,
+  MapPin,
+  ArrowRight,
+  Award,
   Database,
   Search,
   Activity,
@@ -46,7 +46,7 @@ export default function AboutPage() {
             The Science Behind Unbreakable Bonds
           </h1>
           <p className="text-sm sm:text-base text-slate-300 max-w-xl mx-auto font-light">
-            Founded with a vision to revolutionize dry-mix technology, Aqua Stone Company is one of India&apos;s leading manufacturers of high-performance tiling chemistry.
+            Founded with a vision to revolutionize dry-mix technology, Aqua Stone Industries is one of India&apos;s leading manufacturers of high-performance tiling chemistry.
           </p>
         </div>
       </section>

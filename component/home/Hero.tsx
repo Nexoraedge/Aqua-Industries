@@ -43,12 +43,13 @@ const Hero = ({ scrollY = 0 }: { scrollY?: number }) => {
                 <div className="w-full lg:col-span-7 space-y-7">
 
 
-                    <h1 className="hero-text-anim font-serif text-4xl sm:text-6xl lg:text-7xl font-light leading-[1.1] text-white tracking-tight">
-                        Mastering <span className="italic text-brand-300 font-normal">Structural Bonds,</span> Engineered for Architectural Perfection.
+                    <h1 className="hero-text-anim font-sans text-5xl sm:text-7xl lg:text-[6rem] font-light tracking-tighter leading-[1] text-white">
+                        Flawless Tiles. <br />
+                        <span className="italic font-normal text-white/60">Unbreakable Bonds.</span>
                     </h1>
 
                     <p className="hero-text-anim font-sans text-brand-200/80 font-light max-w-lg text-sm sm:text-base leading-relaxed tracking-wide">
-                        Transform high-end spatial installations with our premium, polymer-modified tile adhesives and advanced resin chemistries. Developed for structural permanence.
+                        Get the strongest bonds for your tiles and stones with our premium factory-direct products. Built to last a lifetime without cracks or loose tiles.
                     </p>
 
                     <div className="hero-text-anim pt-4 flex flex-wrap items-center gap-6">

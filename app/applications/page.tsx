@@ -1,133 +1,143 @@
 import React from "react";
 import Link from "next/link";
-import { ArrowRight, Droplets, Maximize, Sun, Thermometer, Box } from "lucide-react";
+import { ArrowRight } from "lucide-react";
 
 export default function ApplicationsPage() {
-  const applications = [
-    {
-      id: "swimming-pools",
-      title: "Swimming Pools & Water Tanks",
-      icon: Droplets,
-      desc: "Underwater installations require adhesives that resist extreme hydrostatic pressure, chemical chlorine exposure, and continuous submersion without degrading.",
-      product: "UltimaBond® Premium",
-      seoTargets: "swimming pool tile adhesive, underwater epoxy grout, glass mosaic adhesive",
-      color: "bg-blue-50 text-blue-600 border-blue-200"
-    },
-    {
-      id: "exterior-facades",
-      title: "Exterior High-Rise Facades",
-      icon: Sun,
-      desc: "Exterior wall claddings face severe thermal shocks (hot days to cold nights) and wind loads. Our S1 deformable adhesives absorb these movements to prevent tile debonding.",
-      product: "UltimaBond® Premium",
-      seoTargets: "exterior wall stone adhesive, facade tile adhesive, vertical slip resistance",
-      color: "bg-amber-50 text-amber-600 border-amber-200"
-    },
-    {
-      id: "large-format",
-      title: "Large Format Vitrified Slabs",
-      icon: Maximize,
-      desc: "Modern 1200x2400mm+ slabs require high wettability and extreme shear strength to bear the structural weight without hollow sounding or cracking.",
-      product: "FlexiFix® Highly Flexible",
-      seoTargets: "large format tile adhesive, heavy stone adhesive, double charge tile adhesive",
-      color: "bg-emerald-50 text-emerald-600 border-emerald-200"
-    },
-    {
-      id: "heated-floors",
-      title: "Radiant Heated Floors",
-      icon: Thermometer,
-      desc: "Flooring systems with under-tile heating undergo rapid expansion and contraction. Standard cement breaks, but our polymer dispersion flexes seamlessly.",
-      product: "FlexiFix® Highly Flexible",
-      seoTargets: "heated floor tile adhesive, thermal shock resistant cement",
-      color: "bg-rose-50 text-rose-600 border-rose-200"
-    },
-    {
-      id: "commercial-flooring",
-      title: "Commercial & Retail Flooring",
-      icon: Box,
-      desc: "High-traffic zones like malls and hotel lobbies require adhesives with high compressive strength to withstand heavy dynamic loads and footfall.",
-      product: "FlexiFix® Highly Flexible",
-      seoTargets: "commercial floor tile adhesive, high traffic vitrified adhesive",
-      color: "bg-slate-100 text-slate-700 border-slate-300"
-    }
-  ];
+    const applications = [
+        {
+            id: "swimming-pools",
+            num: "01",
+            title: "Swimming Pools",
+            desc: "Engineered to withstand deep water pressure, harsh chlorine, and constant submersion. Never cracks. Never leaks.",
+            product: "UltimaBond® Premium",
+        },
+        {
+            id: "exterior-facades",
+            num: "02",
+            title: "High-Rise Facades",
+            desc: "Absorbs severe thermal shocks—from scorching days to freezing nights. Built to resist wind loads and prevent vertical debonding.",
+            product: "UltimaBond® Premium",
+        },
+        {
+            id: "large-format",
+            num: "03",
+            title: "Massive Slabs",
+            desc: "Designed for heavy 1200x2400mm+ vitrified slabs. Extreme shear strength locks massive stones firmly into place without hollow spots.",
+            product: "FlexiFix® Highly Flexible",
+        },
+        {
+            id: "heated-floors",
+            num: "04",
+            title: "Heated Floors",
+            desc: "Under-tile heating causes rapid expansion. Standard cement breaks. Our polymer-modified dispersion flexes and holds.",
+            product: "FlexiFix® Highly Flexible",
+        },
+        {
+            id: "commercial-flooring",
+            num: "05",
+            title: "Heavy Traffic Zones",
+            desc: "Malls, lobbies, and airports. High compressive strength formulas built to endure extreme dynamic footfall and heavy rolling loads.",
+            product: "FlexiFix® Highly Flexible",
+        }
+    ];
 
-  return (
-    <div className="bg-slate-50 min-h-screen pb-24">
-      {/* Page Header */}
-      <section className="bg-gradient-navy text-white py-16 px-4 text-center relative overflow-hidden">
-        <div className="absolute top-0 right-0 w-96 h-96 bg-brand-500/10 rounded-full blur-3xl pointer-events-none" />
-        <div className="max-w-4xl mx-auto relative z-10">
-          <span className="text-xs font-bold uppercase tracking-[0.2em] text-sky-400 bg-brand-900/60 border border-brand-850 px-4 py-1.5 rounded-full inline-block mb-4">
-            Architectural Applications
-          </span>
-          <h1 className="font-serif text-4xl sm:text-5xl font-black mb-4 tracking-tight leading-tight">
-            Engineered For Every Environment
-          </h1>
-          <p className="text-sm sm:text-base text-slate-300 max-w-xl mx-auto font-light">
-            Different tiling environments demand specialized polymer chemistries. Explore our solutions tailored for the most demanding structural spaces.
-          </p>
-        </div>
-      </section>
-
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 mt-16 space-y-12">
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-          {applications.map((app) => {
-            const Icon = app.icon;
-            return (
-              <div 
-                key={app.id} 
-                id={app.id}
-                className="bg-white rounded-3xl p-8 shadow-premium border border-slate-150 flex flex-col justify-between hover:shadow-hover transition-all-custom group"
-              >
-                <div>
-                  <div className={`w-14 h-14 rounded-2xl flex items-center justify-center border ${app.color} mb-6 transition-transform group-hover:scale-110`}>
-                    <Icon className="w-6 h-6" />
-                  </div>
-                  <h3 className="font-serif text-2xl font-bold text-slate-900 mb-3 leading-tight">
-                    {app.title}
-                  </h3>
-                  <p className="text-sm text-slate-500 font-light leading-relaxed mb-6">
-                    {app.desc}
-                  </p>
+    return (
+        <div className="bg-[#fcfbf9] min-h-screen pb-24 selection:bg-brand-900 selection:text-white">
+            
+            {/* ================= HERO SECTION ================= */}
+            <section className="pt-40 pb-24 px-6 sm:px-12 max-w-[1400px] mx-auto">
+                <div className="max-w-3xl">
+                    <span className="text-[10px] font-bold uppercase tracking-[0.25em] text-brand-600 block mb-6">
+                        Architectural Applications
+                    </span>
+                    
+                    <h1 className="font-serif text-5xl sm:text-7xl lg:text-[7rem] font-light tracking-tighter leading-[0.9] text-brand-950 mb-10">
+                        Built For <br />
+                        <span className="italic font-normal text-brand-950/40">Extremes.</span>
+                    </h1>
+                    
+                    <p className="text-sm sm:text-base text-slate-500 font-light max-w-md leading-relaxed">
+                        Different environments demand different chemistry. We engineer structural adhesives specifically formulated for the most punishing architectural conditions.
+                    </p>
                 </div>
-                
-                <div className="pt-6 border-t border-slate-100">
-                  <span className="text-[10px] text-slate-400 font-bold uppercase tracking-wider block mb-1">
-                    Recommended Solution
-                  </span>
-                  <Link 
-                    href={`/products#${app.product.split('®')[0].toLowerCase()}`}
-                    className="inline-flex items-center gap-2 font-bold text-brand-700 hover:text-brand-900 transition-colors group/link"
-                  >
-                    {app.product}
-                    <ArrowRight className="w-4 h-4 group-hover/link:translate-x-1 transition-transform" />
-                  </Link>
-                </div>
-              </div>
-            );
-          })}
-        </div>
+            </section>
 
-        {/* Custom B2B Call to Action */}
-        <section className="bg-gradient-sky border border-brand-150 rounded-3xl p-8 sm:p-12 text-center mt-16">
-          <span className="text-xs font-bold uppercase tracking-widest text-brand-700 mb-2 block">
-            Unique Project Requirements?
-          </span>
-          <h2 className="font-serif text-3xl font-bold text-slate-900 mb-4">
-            Consult Our Engineering Team
-          </h2>
-          <p className="text-sm text-slate-600 font-light max-w-2xl mx-auto mb-8">
-            If you are constructing industrial cold storages, acidic chemical plants, or specialized aviation hangars, our chemical engineers can supply modified formulas direct from the factory.
-          </p>
-          <Link
-            href="/contact"
-            className="inline-flex items-center justify-center gap-2 bg-brand-950 hover:bg-brand-900 text-white px-8 py-4 rounded-full text-sm font-bold tracking-wider uppercase shadow-md transition-all"
-          >
-            Request Technical Consultation
-            <ArrowRight className="w-4 h-4" />
-          </Link>
-        </section>
-      </div>
-    </div>
-  );
+            {/* ================= LISTING SECTION ================= */}
+            <section className="px-6 sm:px-12 max-w-[1400px] mx-auto">
+                <div className="border-t border-brand-900/10">
+                    {applications.map((app) => (
+                        <div 
+                            key={app.id} 
+                            id={app.id}
+                            className="border-b border-brand-900/10 py-12 lg:py-16 flex flex-col md:flex-row gap-8 lg:gap-24 items-start group hover:bg-white transition-colors duration-500 px-4 -mx-4"
+                        >
+                            {/* Matrix Number */}
+                            <div className="w-16 shrink-0 font-mono text-xs font-medium tracking-widest text-brand-950/30 group-hover:text-brand-950 transition-colors">
+                                {app.num} //
+                            </div>
+                            
+                            {/* Main Content */}
+                            <div className="flex-1 space-y-4">
+                                <h3 className="font-serif text-4xl sm:text-5xl font-light text-brand-950 tracking-tight">
+                                    {app.title}
+                                </h3>
+                                <p className="text-slate-500 text-sm font-light max-w-md leading-relaxed">
+                                    {app.desc}
+                                </p>
+                            </div>
+
+                            {/* Solution Block */}
+                            <div className="w-full md:w-64 shrink-0 pt-2 md:pt-0">
+                                <span className="text-[9px] font-bold uppercase tracking-[0.2em] text-brand-950/40 block mb-3">
+                                    Required Solution
+                                </span>
+                                <Link 
+                                    href={`/products#${app.product.split('®')[0].toLowerCase()}`}
+                                    className="group/link inline-flex items-center gap-3 text-brand-950 font-medium hover:text-brand-600 transition-colors"
+                                >
+                                    <span className="border-b border-brand-950/20 group-hover/link:border-brand-600 pb-1">
+                                        {app.product}
+                                    </span>
+                                    <ArrowRight className="w-4 h-4 transform group-hover/link:translate-x-1 transition-transform" />
+                                </Link>
+                            </div>
+                        </div>
+                    ))}
+                </div>
+            </section>
+
+            {/* ================= CTA MONOLITH ================= */}
+            <section className="px-6 sm:px-12 max-w-[1400px] mx-auto mt-32">
+                <div className="bg-brand-950 text-white p-12 sm:p-24 lg:p-32 text-center rounded-none relative overflow-hidden">
+                    
+                    {/* Subtle grid pattern inside Monolith */}
+                    <div className="absolute inset-0 bg-[linear-gradient(rgba(255,255,255,0.03)_1px,transparent_1px),linear-gradient(90deg,rgba(255,255,255,0.03)_1px,transparent_1px)] bg-[size:4rem_4rem] pointer-events-none" />
+                    
+                    <div className="relative z-10">
+                        <span className="text-[10px] font-bold uppercase tracking-[0.25em] text-brand-400 block mb-8">
+                            Unique Requirements?
+                        </span>
+                        
+                        <h2 className="font-serif text-5xl sm:text-6xl lg:text-[6rem] font-light tracking-tighter leading-[0.95] mb-8">
+                            Custom <br />
+                            <span className="italic font-normal text-white/40">Chemistry.</span>
+                        </h2>
+                        
+                        <p className="text-white/60 font-light text-sm sm:text-base max-w-md mx-auto mb-12 leading-relaxed">
+                            Building an acidic chemical plant or specialized aviation hangar? Our engineers can modify structural formulas and ship them factory-direct.
+                        </p>
+                        
+                        <Link
+                            href="/contact"
+                            className="inline-flex items-center gap-3 text-xs font-bold uppercase tracking-widest text-brand-950 bg-white px-8 py-5 hover:bg-brand-100 transition-colors"
+                        >
+                            <span>Consult Engineering</span>
+                            <ArrowRight className="w-4 h-4" />
+                        </Link>
+                    </div>
+                </div>
+            </section>
+
+        </div>
+    );
 }

@@ -27,11 +27,11 @@ export default function Footer() {
           <div className="flex flex-col gap-5">
             <Link href="/" className="inline-block group w-max">
               <div className="rounded-xl shadow-md transform group-hover:scale-105 transition-transform">
-                <img src="/aquo-logo.png" alt="Aqua Stone Company Logo" className="h-8 w-auto object-contain" />
+                <img src="/assest/Logo-aqua-white.png" alt="Aqua Stone Industries Logo" className="h-8 w-auto object-contain" />
               </div>
             </Link>
             <p className="text-sm text-slate-400 leading-relaxed font-light">
-              Aqua Stone Company is a leading manufacturer of premium, polymer-modified tile adhesives, epoxy grouts, and surface care products. Engineered for extreme durability and heavy duty architectural cladding.
+              Aqua Stone Industries is a leading manufacturer of premium, polymer-modified tile adhesives, epoxy grouts, and surface care products. Engineered for extreme durability and heavy duty architectural cladding.
             </p>
             <div className="flex flex-wrap gap-3 mt-2">
               <div className="flex items-center gap-1.5 bg-brand-900/60 border border-brand-800 px-3 py-1 rounded-full text-[10px] font-semibold text-sky-300">
@@ -118,7 +118,7 @@ export default function Footer() {
               <li className="flex items-start gap-3">
                 <MapPin className="w-5 h-5 text-sky-400 shrink-0 mt-0.5" />
                 <span>
-                  <strong>Aqua Stone Company</strong><br />
+                  <strong>Aqua Stone Industries</strong><br />
                   Plot No. 42-45, Industrial Area Phase II,<br />
                   Mansarovar, Jaipur, Rajasthan - 302020
                 </span>
@@ -151,7 +151,7 @@ export default function Footer() {
 
         {/* Bottom Bar */}
         <div className="border-t border-brand-900 pt-8 mt-12 flex flex-col sm:flex-row items-center justify-between gap-4 text-xs text-slate-500 font-light">
-          <p>© {currentYear} Aqua Stone Company. All rights reserved. Designed for elite industrial performance.</p>
+          <p>© {currentYear} Aqua Stone Industries. All rights reserved. Designed for elite industrial performance.</p>
           <div className="flex gap-6">
             <Link href="/privacy" className="hover:text-slate-400 transition-colors">Privacy Policy</Link>
             <Link href="/terms" className="hover:text-slate-400 transition-colors">Terms of Service</Link>

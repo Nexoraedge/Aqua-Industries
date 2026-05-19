@@ -87,17 +87,17 @@ export default function Category_Showcase() {
 
                 {/* ================= LEFT CONTENT (Sticky) ================= */}
                 <div ref={textRef} className="lg:col-span-5 flex flex-col justify-start h-auto lg:h-[80vh] pt-10">
-                    <span className="inline-block w-max px-3 py-1 bg-brand-50 text-brand-700 text-[10px] font-bold uppercase tracking-[0.2em] mb-8 border border-brand-100">
-                        Comprehensive Solutions
+                    <span className="text-[10px] font-bold uppercase tracking-[0.25em] text-brand-600 block mb-6">
+                        Our Products
                     </span>
 
-                    <h2 className="font-serif text-5xl sm:text-6xl lg:text-7xl font-light text-brand-950 tracking-tight leading-[1.05] mb-8">
-                        Complete <br />
-                        <span className="font-medium text-brand-700">Systems</span> Architecture
+                    <h2 className="font-serif text-5xl sm:text-6xl lg:text-[5rem] font-light tracking-tighter leading-[0.95] text-brand-950 mb-8">
+                        Everything <br />
+                        <span className="italic font-normal text-brand-950/40">You Need.</span>
                     </h2>
 
                     <p className="text-base text-slate-500 font-light leading-relaxed max-w-md mb-12">
-                        Aqua Stone provides an integrated ecosystem of construction chemicals. From structural adhesives to 100% waterproof epoxies, every formulation is engineered to interact perfectly with the next.
+                        Aqua Stone provides a complete range of tile and stone fixing products. From strong adhesives to waterproof epoxies, everything is made to give you the best results.
                     </p>
 
                     <Link
@@ -136,14 +136,14 @@ export default function Category_Showcase() {
                                         <span className="text-[10px] font-bold uppercase tracking-[0.2em] text-brand-300 block opacity-0 group-hover:opacity-100 transition-opacity duration-500 delay-100">
                                             Category 0{idx + 1}
                                         </span>
-                                        <h3 className="font-serif text-3xl font-normal text-white leading-tight">
+                                        <h3 className="font-sans text-3xl font-normal text-white leading-tight">
                                             {cat.title}
                                         </h3>
                                         <p className="text-sm text-slate-300 font-light max-w-[220px] opacity-0 group-hover:opacity-100 transition-opacity duration-500 delay-200">
                                             {cat.desc}
                                         </p>
                                     </div>
-                                    <div className="w-12 h-12 rounded-full border border-white/20 flex items-center justify-center text-white backdrop-blur-md transform group-hover:bg-brand-500 group-hover:border-brand-500 transition-all duration-500 overflow-hidden group-hover:scale-110">
+                                    <div className="p-2 rounded-full border border-white/20 flex items-center justify-center text-white backdrop-blur-md transform group-hover:bg-brand-500 group-hover:border-brand-500 transition-all duration-500 overflow-hidden group-hover:scale-110">
                                         <ArrowUpRight className="w-5 h-5 transform -translate-x-full translate-y-full group-hover:translate-x-0 group-hover:translate-y-0 transition-transform duration-500" />
                                         <ArrowUpRight className="w-5 h-5 absolute transform translate-x-0 translate-y-0 group-hover:translate-x-full group-hover:-translate-y-full transition-transform duration-500" />
                                     </div>

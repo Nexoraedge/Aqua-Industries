@@ -86,12 +86,12 @@ export default function Home_Product_Teaser() {
                 {/* ================= SECTION HEADER ================= */}
                 <div className="flex flex-col md:flex-row md:items-end justify-between mb-16 gap-8">
                     <div className="space-y-4 text-left">
-                        <span className="text-[10px] font-bold uppercase tracking-[0.3em] text-brand-600 flex items-center gap-2">
-                            <span className="w-8 h-[1px] bg-brand-600 block"></span>
+                        <span className="text-[10px] font-bold uppercase tracking-[0.25em] text-brand-600 block">
                             The Core Portfolio
                         </span>
-                        <h2 className="font-serif text-4xl sm:text-5xl lg:text-6xl font-light text-brand-950 tracking-tight leading-none">
-                            Flagship Formulations
+                        <h2 className="font-serif text-5xl sm:text-6xl lg:text-[5rem] font-light tracking-tighter leading-[0.95] text-brand-950">
+                            Flagship <br />
+                            <span className="italic font-normal text-brand-950/40">Formulations.</span>
                         </h2>
                     </div>
                     <Link
@@ -115,7 +115,7 @@ export default function Home_Product_Teaser() {
                             <span className="inline-block px-3 py-1 bg-emerald-900 text-emerald-100 text-[9px] font-bold uppercase tracking-widest border border-emerald-800">
                                 Primary Seller
                             </span>
-                            <h3 className="font-serif text-4xl md:text-5xl font-light text-brand-950 leading-[1.1]">
+                            <h3 className="font-sans text-4xl md:text-5xl font-light text-brand-950 leading-[1.1]">
                                 Ultima Bond <br /> <span className="font-semibold">Type 2T</span>
                             </h3>
                             <p className="text-sm text-slate-500 font-light leading-relaxed max-w-sm">
@@ -140,7 +140,7 @@ export default function Home_Product_Teaser() {
                     {/* BENTO BOX 2: The Tall Dark Contrast Epoxy Card (Row Span 2) */}
                     <Link
                         href="/products#gripoxy-system"
-                        className="bento-box col-span-1 md:col-span-1 md:row-span-2 lg:row-span-2 lg:col-span-1 bg-brand-950 text-white border border-brand-900 p-6 sm:p-8 md:p-10 relative flex flex-col items-center justify-between group overflow-hidden shadow-sm hover:shadow-2xl transition-shadow duration-500 rounded-none cursor-pointer text-center"
+                        className="bento-box col-span-1 md:col-span-2  lg:row-span-2 lg:col-span-1 bg-brand-950 text-white border border-brand-900 p-6 sm:p-8 md:p-10 relative flex flex-col items-center justify-between group overflow-hidden shadow-sm hover:shadow-2xl transition-shadow duration-500 rounded-none cursor-pointer text-center"
                     >
                         {/* Soft background glow */}
                         <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-64 h-64 bg-sky-500/20 rounded-full blur-[80px] pointer-events-none group-hover:bg-sky-400/30 transition-colors duration-500" />
@@ -149,7 +149,7 @@ export default function Home_Product_Teaser() {
                             <span className="inline-block px-3 py-1 bg-sky-900 text-sky-100 text-[9px] font-bold uppercase tracking-widest border border-sky-800">
                                 100% Stain Proof
                             </span>
-                            <h3 className="font-serif text-3xl md:text-4xl font-light leading-tight">
+                            <h3 className="font-sans text-3xl md:text-4xl font-light leading-tight">
                                 Gripoxy® <br /> <span className="font-semibold">System</span>
                             </h3>
                         </div>
@@ -179,7 +179,7 @@ export default function Home_Product_Teaser() {
                         className="bento-box col-span-1 md:col-span-1 lg:col-span-1 bg-white border border-brand-100 p-6 sm:p-8 flex flex-col justify-between group overflow-hidden shadow-sm hover:shadow-premium transition-shadow duration-500 rounded-none cursor-pointer"
                     >
                         <div className="flex justify-between items-start z-10">
-                            <h3 className="font-serif text-2xl text-brand-950 font-normal">
+                            <h3 className="font-sans text-2xl text-brand-950 font-normal">
                                 Type 1T <br /><span className="text-xs font-sans font-bold uppercase tracking-widest text-amber-600 mt-2 block">Standard Fix</span>
                             </h3>
                             <Plus className="w-5 h-5 text-slate-300 group-hover:text-brand-500 transition-colors" />
@@ -200,7 +200,7 @@ export default function Home_Product_Teaser() {
                         className="bento-box col-span-1 md:col-span-1 lg:col-span-1 bg-white border border-brand-100 p-6 sm:p-8 flex flex-col justify-between group overflow-hidden shadow-sm hover:shadow-premium transition-shadow duration-500 rounded-none cursor-pointer"
                     >
                         <div className="flex justify-between items-start z-10">
-                            <h3 className="font-serif text-2xl text-brand-950 font-normal">
+                            <h3 className="font-sans text-2xl text-brand-950 font-normal">
                                 Type 3 <br /><span className="text-xs font-sans font-bold uppercase tracking-widest text-brand-600 mt-2 block">Heavy Duty Exterior</span>
                             </h3>
                             <Plus className="w-5 h-5 text-slate-300 group-hover:text-brand-500 transition-colors" />
