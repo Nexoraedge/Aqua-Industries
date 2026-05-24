@@ -40,25 +40,26 @@ export default function Navbar() {
       name: "Products Catalog",
       href: "/products",
       subLinks: [
-        { name: "Tile Adhesives", href: "/products#adhesives" },
-        { name: "Polymer Grouts", href: "/products#grouts" },
-        { name: "Epoxy Systems", href: "/products#epoxy" },
-        { name: "Wall Care & Putty", href: "/products#wallcare" },
+        { name: "Ultima Bond Adhesives", href: "/products/ultima-bond-tile-adhesives" },
+        { name: "Gripoxy Grouts", href: "/products/gripoxy-epoxy-grouts" },
+        { name: "Ultima V-Two Grout", href: "/products/ultima-v-two-grout" },
       ]
     },
     { name: "Architectural Applications", href: "/applications" },
     {
-      name: "Interactive Tools",
+      name: "Engineering Tools",
       href: "/tools",
       subLinks: [
-        { name: "Joint Filler Matcher", href: "/tools#filler" },
-        { name: "Tonnage Calculator", href: "/tools#tonnage" },
-        { name: "Volume Estimator", href: "/tools#estimator" }
+        { name: "Adhesive Calculator", href: "/tools/adhesive-calculator" },
+        { name: "Grout Calculator", href: "/tools/grout-calculator" },
+        { name: "Room Visualizer", href: "/tools/visualizer" },
+        { name: "Right Adhesive for you", href: "/tools/selector" }
       ]
     },
     { name: "Why Choose Us", href: "/why-us" },
     { name: "Certifications", href: "/certifications" },
-    { name: "Contact & Inquiry", href: "/contact" },
+    { name: "Knowledge Hub", href: "/blog" },
+    { name: "Contact HQ", href: "/contact" },
   ];
 
   const menuVariants: Variants = {
@@ -88,16 +89,19 @@ export default function Navbar() {
   };
 
   const linkVariants: Variants = {
-    closed: { y: 50, opacity: 0, transition: { duration: 0.4, ease: [0.4, 0, 0.2, 1] } },
-    open: { y: 0, opacity: 1, transition: { duration: 0.5, ease: [0.4, 0, 0.2, 1] } }
+    closed: { y: 20, opacity: 0, transition: { duration: 0.3, ease: [0.4, 0, 0.2, 1] } },
+    open: { y: 0, opacity: 1, transition: { duration: 0.4, ease: [0.4, 0, 0.2, 1] } }
   };
+
+  const isLightPage = pathname !== "/";
+  const useDarkElements = (isLightPage && !isOpen) || (isScrolled && !isOpen);
 
   return (
     <>
       <header
-        className={`fixed top-0 left-0 right-0 z-50 transition-all duration-500 ${isScrolled && !isOpen
-          ? " backdrop-blur-lg shadow-sm   bg-white top-3 w-[90vw] md:max-w-[70vw] mx-auto rounded-full  md:py-2"
-          : "bg-transparent py-6"
+        className={`fixed top-0 left-0 right-0 z-[60] transition-all duration-500 ${isScrolled && !isOpen
+          ? "backdrop-blur-lg shadow-sm bg-white top-2 w-[95vw] md:max-w-[70vw] mx-auto rounded-full py-2"
+          : "bg-transparent py-4 md:py-6"
           }`}
       >
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
@@ -106,12 +110,12 @@ export default function Navbar() {
             <Link
               href="/"
               onClick={() => setIsOpen(false)}
-              className="relative z-60 flex items-center group"
+              className="relative flex items-center group"
             >
               <img
-                src={isScrolled && !isOpen ? "/aquo-logo.png" : "/assest/Logo-aqua-white.png"}
+                src={useDarkElements ? "/aquo-logo.png" : "/assest/Logo-aqua-white.png"}
                 alt="Aqua Stone Logo"
-                className={`h-8 sm:h-10 w-auto object-contain transition-all duration-500 group-hover:scale-105 ${isOpen ? "brightness-100 opacity-95" : "opacity-100"
+                className={`h-7 sm:h-8 md:h-10 w-auto object-contain transition-all duration-500 group-hover:scale-105 ${isOpen ? "brightness-100 opacity-95" : "opacity-100"
                   }`}
               />
             </Link>
@@ -119,25 +123,25 @@ export default function Navbar() {
             {/* Stylish Animated Custom Burger Right */}
             <button
               onClick={() => setIsOpen(!isOpen)}
-              className="relative z-[60] w-12 h-12 flex flex-col items-end justify-center gap-[6px] group cursor-pointer focus:outline-none"
+              className="relative w-10 h-10 md:w-12 md:h-12 flex flex-col items-end justify-center gap-[5px] md:gap-[6px] group cursor-pointer focus:outline-none"
               aria-label="Toggle Menu"
             >
               <span
-                className={`block h-[2px] rounded-full transition-all duration-300 ease-out  transform origin-right ${isOpen
-                  ? "bg-white w-8 -rotate-45 -translate-x-[2px] -translate-y-[1px]"
-                  : (isScrolled ? "bg-brand-600 w-4" : "bg-white w-4")
-                  } group-hover:bg-brand-500 group-hover:w-8`}
+                className={`block h-[2px] rounded-full transition-all duration-300 ease-out transform origin-right ${isOpen
+                  ? "bg-white w-6 md:w-8 -rotate-45 -translate-x-[2px] -translate-y-[1px]"
+                  : (useDarkElements ? "bg-brand-600 w-4" : "bg-white w-4")
+                  } group-hover:bg-brand-500 group-hover:w-6 md:group-hover:w-8`}
               />
               <span
                 className={`block h-[2px] rounded-full transition-all duration-300 ease-out ${isOpen
-                  ? "bg-white opacity-0 w-8"
-                  : (isScrolled ? "bg-brand-600 w-6" : "bg-white w-6")
-                  } group-hover:bg-brand-500 group-hover:w-8`}
+                  ? "bg-white opacity-0 w-6 md:w-8"
+                  : (useDarkElements ? "bg-brand-600 w-5 md:w-6" : "bg-white w-5 md:w-6")
+                  } group-hover:bg-brand-500 group-hover:w-6 md:group-hover:w-8`}
               />
               <span
                 className={`block h-[2px] rounded-full transition-all duration-300 ease-out transform origin-right ${isOpen
-                  ? "bg-white w-7 rotate-45 -translate-x-[2px] translate-y-[1px]"
-                  : (isScrolled ? "bg-brand-600 w-8" : "bg-white w-8")
+                  ? "bg-white w-5 md:w-7 rotate-45 -translate-x-[2px] translate-y-[1px]"
+                  : (useDarkElements ? "bg-brand-600 w-6 md:w-8" : "bg-white w-6 md:w-8")
                   } group-hover:bg-brand-500`}
               />
             </button>
@@ -153,22 +157,22 @@ export default function Navbar() {
             animate="open"
             exit="closed"
             variants={menuVariants}
-            className="fixed inset-0 bg-brand-950 z-40 flex flex-col overflow-y-auto"
+            className="fixed inset-0 bg-brand-950 z-50 overflow-y-auto overflow-x-hidden pt-24 pb-12"
           >
             {/* Ambient Lighting Background */}
-            <div className="absolute top-0 right-0 w-[30vw] h-[60vw] bg-brand-500/10 rounded-full blur-[100px] pointer-events-none" />
-            <div className="absolute bottom-0 left-0 w-[30vw] h-[60vw] bg-sky-400/5 rounded-full blur-[100px] pointer-events-none" />
+            <div className="absolute top-0 right-0 w-[50vw] md:w-[30vw] h-[80vw] md:h-[60vw] bg-brand-500/10 rounded-full blur-[80px] md:blur-[100px] pointer-events-none" />
+            <div className="absolute bottom-0 left-0 w-[50vw] md:w-[30vw] h-[80vw] md:h-[60vw] bg-sky-400/5 rounded-full blur-[80px] md:blur-[100px] pointer-events-none" />
 
-            <div className="max-w-7xl mx-auto w-full px-4 sm:px-6 lg:px-8 min-h-screen flex flex-col justify-center pt-28 pb-16 relative z-10 ">
+            <div className="max-w-7xl mx-auto w-full px-4 sm:px-6 lg:px-8 relative z-10 flex flex-col min-h-full">
 
-              <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-8 items-center h-full">
+              <div className="grid grid-cols-1 lg:grid-cols-12 gap-10 lg:gap-8 items-start flex-grow">
 
                 {/* Huge Cinematic Links List */}
                 <motion.div
                   variants={linkContainerVariants}
-                  className="lg:col-span-7 flex flex-col gap-4 sm:gap-5"
+                  className="lg:col-span-7 flex flex-col gap-3 sm:gap-4 md:gap-5 pb-8 lg:pb-0"
                 >
-                  <span className="text-xs font-bold uppercase tracking-[0.3em] text-sky-400 mb-2 overflow-hidden">
+                  <span className="text-[10px] sm:text-xs font-bold uppercase tracking-[0.3em] text-sky-400 mb-1 sm:mb-2 overflow-hidden">
                     <motion.span variants={linkVariants} className="block">Site Navigation</motion.span>
                   </span>
 
@@ -180,7 +184,7 @@ export default function Navbar() {
                     return (
                       <div
                         key={idx}
-                        className=" py-1 flex flex-col"
+                        className="py-1 flex flex-col"
                         onMouseEnter={() => hasDropdown && setActiveDropdown(link.name)}
                         onMouseLeave={() => hasDropdown && setActiveDropdown(null)}
                       >
@@ -188,16 +192,16 @@ export default function Navbar() {
                           {hasDropdown ? (
                             <button
                               onClick={() => setActiveDropdown(isDropdownOpen ? null : link.name)}
-                              className="group flex  items-center gap-4 sm:gap-6 w-max focus:outline-none"
+                              className="group flex items-center justify-between sm:justify-start gap-4 sm:gap-6 w-full sm:w-max focus:outline-none"
                             >
-                              <span className={`font-serif text-2xl sm:text-3xl md:text-5xl font-black tracking-tight transition-all duration-300 ${isDropdownOpen || isActive
-                                ? "text-white translate-x-2"
-                                : "text-slate-400 group-hover:text-white group-hover:translate-x-4"
+                              <span className={`font-serif text-[1.45rem] sm:text-3xl md:text-4xl lg:text-5xl font-black tracking-tight transition-all duration-300 text-left ${isDropdownOpen || isActive
+                                ? "text-white sm:translate-x-2"
+                                : "text-slate-400 group-hover:text-white sm:group-hover:translate-x-4"
                                 }`}>
                                 {link.name}
                               </span>
                               <div className={`transition-transform duration-300 ${isDropdownOpen ? 'rotate-90 text-brand-500' : 'text-slate-600 group-hover:text-white'}`}>
-                                <ArrowRight className="w-6 h-6 sm:w-8 sm:h-8" />
+                                <ArrowRight className="w-5 h-5 sm:w-6 sm:h-6 md:w-8 md:h-8" />
                               </div>
                             </button>
                           ) : (
@@ -206,13 +210,12 @@ export default function Navbar() {
                               onClick={() => setIsOpen(false)}
                               className="group flex items-center gap-4 sm:gap-6 w-max"
                             >
-                              <span className={`font-serif text-2xl sm:text-3xl md:text-5xl font-black tracking-tight transition-all duration-300 ${isActive
-                                ? "text-white translate-x-2"
-                                : "text-slate-400 group-hover:text-white group-hover:translate-x-4"
+                              <span className={`font-serif text-[1.45rem] sm:text-3xl md:text-4xl lg:text-5xl font-black tracking-tight transition-all duration-300 ${isActive
+                                ? "text-white sm:translate-x-2"
+                                : "text-slate-400 group-hover:text-white sm:group-hover:translate-x-4"
                                 }`}>
                                 {link.name}
                               </span>
-
                             </Link>
                           )}
                         </motion.div>
@@ -226,14 +229,14 @@ export default function Navbar() {
                                 animate={{ height: "auto", opacity: 1 }}
                                 exit={{ height: 0, opacity: 0 }}
                                 transition={{ duration: 0.3, ease: "easeInOut" }}
-                                className="overflow-hidden pl-4 sm:pl-4 mt-2 md:mt-4 flex flex-col gap-3 md:gap-4 border-l-2 border-brand-800/30 ml-2 sm:ml-2"
+                                className="overflow-hidden pl-3 sm:pl-4 mt-2 flex flex-col gap-2.5 md:gap-4 border-l-2 border-brand-800/30 ml-1.5 sm:ml-2"
                               >
                                 {link.subLinks?.map((sub, sIdx) => (
                                   <Link
                                     key={sIdx}
                                     href={sub.href}
                                     onClick={() => setIsOpen(false)}
-                                    className="text-slate-400 hover:text-sky-400 text-lg sm:text-xl md:text-2xl font-serif tracking-wide transition-colors py-1 w-max block"
+                                    className="text-slate-400 hover:text-sky-400 text-base sm:text-lg md:text-xl font-serif tracking-wide transition-colors py-1 w-max block"
                                   >
                                     {sub.name}
                                   </Link>
@@ -250,38 +253,38 @@ export default function Navbar() {
                 {/* Corporate Sidebar Info */}
                 <motion.div
                   variants={linkVariants}
-                  className="lg:col-span-5 flex flex-col gap-10 lg:pl-12 lg:border-l border-brand-800/50 mt-4 py-4  lg:mt-0"
+                  className="lg:col-span-5 flex flex-col gap-8 lg:gap-10 lg:pl-12 lg:border-l border-brand-800/50 pt-4 lg:pt-0"
                 >
                   {/* B2B Call to Action Panel */}
-                  <div className="bg-brand-900/40 p-8 rounded-3xl border border-brand-800/50 backdrop-blur-md shadow-2xl">
-                    <h3 className="font-serif text-2xl text-white font-bold mb-3">Project Requirements?</h3>
-                    <p className="text-sm text-slate-400 font-light mb-6 leading-relaxed">
+                  <div className="bg-brand-900/40 p-6 sm:p-8 rounded-2xl sm:rounded-3xl border border-brand-800/50 backdrop-blur-md shadow-2xl">
+                    <h3 className="font-serif text-xl sm:text-2xl text-white font-bold mb-2 sm:mb-3">Project Requirements?</h3>
+                    <p className="text-xs sm:text-sm text-slate-400 font-light mb-5 sm:mb-6 leading-relaxed">
                       Connect with our engineering team for factory-direct bulk pricing, custom chemical formulation, and certified lab datasheets.
                     </p>
                     <Link
                       href="/contact"
                       onClick={() => setIsOpen(false)}
-                      className="inline-flex items-center gap-2 bg-brand-500 hover:bg-brand-400 text-white px-6 py-3.5 rounded-full text-xs font-bold uppercase tracking-wider transition-colors shadow-lg"
+                      className="inline-flex items-center justify-center sm:justify-start gap-2 bg-brand-500 hover:bg-brand-400 text-white px-5 sm:px-6 py-3 sm:py-3.5 rounded-full text-[10px] sm:text-xs font-bold uppercase tracking-wider transition-colors shadow-lg w-full sm:w-max"
                     >
                       Contact Sales Team
-                      <ArrowRight className="w-4 h-4" />
+                      <ArrowRight className="w-3 h-3 sm:w-4 sm:h-4" />
                     </Link>
                   </div>
 
                   {/* Immediate Contact Details */}
-                  <div className="space-y-5">
-                    <span className="text-xs font-bold uppercase tracking-[0.2em] text-slate-500 block border-b border-brand-800/50 pb-2">
+                  <div className="space-y-4 sm:space-y-5 pb-12 lg:pb-0">
+                    <span className="text-[10px] sm:text-xs font-bold uppercase tracking-[0.2em] text-slate-500 block border-b border-brand-800/50 pb-2">
                       Corporate Office
                     </span>
-                    <div className="text-sm text-slate-300 font-light leading-relaxed">
+                    <div className="text-xs sm:text-sm text-slate-300 font-light leading-relaxed">
                       Plot No. 42-45, Industrial Area Phase II<br />
                       Mansarovar, Jaipur, Rajasthan - 302020
                     </div>
                     <div className="flex flex-col gap-1">
-                      <a href="tel:+919876543210" className="text-white hover:text-brand-400 font-bold text-xl transition-colors w-max">
+                      <a href="tel:+919876543210" className="text-white hover:text-brand-400 font-bold text-lg sm:text-xl transition-colors w-max">
                         +91 98765 43210
                       </a>
-                      <a href="mailto:info@aquastonecompany.com" className="text-brand-400 hover:text-white text-sm transition-colors w-max">
+                      <a href="mailto:info@aquastonecompany.com" className="text-brand-400 hover:text-white text-xs sm:text-sm transition-colors w-max">
                         info@aquastonecompany.com
                       </a>
                     </div>

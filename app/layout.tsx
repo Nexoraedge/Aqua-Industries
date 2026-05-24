@@ -44,7 +44,7 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en" className="h-full scroll-smooth">
+    <html lang="en" className="h-full scroll-smooth" data-scroll-behavior="smooth">
       <body className={`${montserrat.className} min-h-full flex flex-col bg-slate-50 text-slate-900 selection:bg-brand-200 selection:text-brand-900`}>
         <SmoothScroll>
           <Navbar />
