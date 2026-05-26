@@ -74,7 +74,7 @@ export default function AdhesiveCalculatorPage() {
                     {/* ================= INPUT FORM PANEL ================= */}
                     <form
                         onSubmit={handleCalculateAdhesive}
-                        className="calc-panel xl:col-span-5 bg-white p-8 sm:p-12 border border-slate-300 shadow-sm sticky top-32 rounded-none"
+                        className="calc-panel xl:col-span-5 bg-white p-8 sm:p-12 border border-slate-300 shadow-sm relative rounded-none z-10"
                     >
                         <div className="mb-12 border-b border-slate-200 pb-8">
                             <h1 className="font-serif text-4xl sm:text-5xl font-light text-brand-950 mb-4 tracking-tight">

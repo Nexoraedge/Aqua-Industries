@@ -37,17 +37,7 @@ export default function ToolsHubPage() {
       // Realistic raw stone/granite texture
       image: "https://images.unsplash.com/photo-1600585154340-be6161a56a0c?q=80&w=1200&auto=format&fit=crop"
     },
-    {
-      id: "visualizer",
-      title: "Joint Visualizer",
-      subtitle: "Aesthetic Sandbox",
-      description: "Interactive rendering module to match premium epoxy and cementitious filler combinations against architectural stone finishes.",
-      icon: Eye,
-      href: "/tools/visualizer",
-      metric: "Render: Real-time",
-      // Realistic terrazzo/mosaic texture
-      image: "https://images.unsplash.com/photo-1576013551627-0cc20b96c2a7?q=80&w=1200&auto=format&fit=crop"
-    },
+
     {
       id: "selector",
       title: "Adhesive Selector",

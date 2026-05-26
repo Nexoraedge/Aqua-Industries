@@ -77,7 +77,7 @@ export default function Product_Interface() {
               className={`group relative flex flex-col bg-gradient-to-br ${category.color} border ${category.border} overflow-hidden shadow-[0_4px_24px_rgba(0,0,0,0.02)] hover:shadow-[0_20px_40px_rgba(0,0,0,0.08)] transition-all duration-700 ease-out p-10 sm:p-14`}
             >
               {/* Massive Watermark Number */}
-              <div className="absolute top-0 right-0 md:right-10 text-[100px] sm:text-[180px] font-serif font-black text-white/80 leading-none -translate-y-1/4 translate-x-1/4 select-none mix-blend-overlay pointer-events-none">
+              <div className="absolute top-0 right-7 md:right-10 text-[100px] sm:text-[180px] font-serif font-black text-white/80 leading-none -translate-y-1/4 translate-x-1/4 select-none mix-blend-overlay pointer-events-none">
                 0{index + 1}
               </div>
 
@@ -132,6 +132,27 @@ export default function Product_Interface() {
 
             </Link>
           ))}
+        </div>
+
+        {/* ================= SELECTOR CTA BANNER ================= */}
+        <div className="mt-20 border border-brand-950/15 bg-brand-950 text-white p-8 sm:p-12 relative overflow-hidden flex flex-col md:flex-row items-center justify-between gap-8 rounded-none">
+          <div className="absolute inset-0 bg-[linear-gradient(rgba(255,255,255,0.01)_1px,transparent_1px),linear-gradient(90deg,rgba(255,255,255,0.01)_1px,transparent_1px)] bg-[size:16px_16px] pointer-events-none" />
+          <div className="space-y-2 relative z-10 text-center md:text-left">
+            <span className="text-[10px] font-mono text-brand-300 uppercase tracking-[0.3em] block">SMART DECISION ENGINE</span>
+            <h2 className="font-serif text-3xl sm:text-4xl lg:text-5xl font-light tracking-tight">
+              Find the <span className="italic text-brand-300">Right Adhesive</span> for You
+            </h2>
+            <p className="text-sm text-slate-400 font-light max-w-xl">
+              Confused about chemical grades and substrates? Run our fast, 3-step diagnostic wizard to match your exact parameters with the perfect mortar system.
+            </p>
+          </div>
+          <Link 
+            href="/tools/selector" 
+            className="relative z-10 bg-white text-brand-950 px-8 py-5 text-[10px] font-bold uppercase tracking-[0.2em] hover:bg-slate-200 transition-all rounded-none group shrink-0 flex items-center gap-3 transform hover:scale-[1.02] active:scale-[0.98]"
+          >
+            Launch Adhesive Selector
+            <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
+          </Link>
         </div>
 
         {/* ================= TRUST BADGE BAR ================= */}

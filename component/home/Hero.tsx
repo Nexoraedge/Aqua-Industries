@@ -34,8 +34,7 @@ const Hero = ({ scrollY = 0 }: { scrollY?: number }) => {
                 className="absolute inset-0 z-0 bg-cover bg-center bg-no-repeat   scale-105"
                 style={{ backgroundImage: "url('/hero_bg_adhesive.png')" }}
             />
-            <div className="absolute inset-0 z-0 bg-gradient-navy opacity-80" />
-            <div className="absolute inset-0 z-0 bg-gradient-to-t from-gray-700 via-transparent to-transparent" />
+            <div className="absolute inset-0 z-0 bg-gradient-to-t from-brand-950 via-transparent to-transparent" />
 
             <div className="max-w-[1440px] w-full mx-auto px-6 sm:px-12 relative z-10 grid grid-cols-1 lg:grid-cols-12 gap-16 items-center">
 
@@ -80,8 +79,8 @@ const Hero = ({ scrollY = 0 }: { scrollY?: number }) => {
 
                 {/* Right Side: Asymmetrical Overlapping Multi-Image Layout (Unita Grid Style) */}
                 <div className="w-full lg:col-span-5 relative h-[380px] sm:h-[480px] flex items-center justify-center lg:justify-end mt-8 lg:mt-0">
-                    {/* Top Right Primary Luxury Card */}
-                    <div className="hero-img-anim absolute w-[80%] h-[80%] right-0 top-0 border border-brand-900 bg-brand-950 p-2 shadow-premium z-20">
+                    {/* Primary Luxury Card */}
+                    <div className="hero-img-anim absolute w-full sm:w-[80%] h-full sm:h-[80%] sm:right-0 sm:top-0 border border-brand-900 bg-brand-950 p-2 shadow-premium z-20">
                         <img
                             src="/hero_small_construction.png"
                             alt="Luxury Stone Surface Application Showcase"
@@ -100,11 +99,9 @@ const Hero = ({ scrollY = 0 }: { scrollY?: number }) => {
             </div>
 
             {/* Subtle bottom background identity trace */}
-            <div className="hero-bg-text absolute md:bottom-0 bottom-4  left-0 right-0 pointer-events-none opacity-[0.04] select-none transform  "
-
-            >
-                <h2 className="text-center font-sans font-black text-[11vw]  uppercase leading-none text-white">
-                    AQUA STONE
+            <div className="hero-bg-text absolute bottom-0 left-0 right-0 pointer-events-none opacity-[0.04] select-none flex justify-center overflow-hidden">
+                <h2 className="font-sans font-black text-[6.5vw] uppercase leading-none text-white whitespace-nowrap">
+                    AQUA STONE INDUSTRIES
                 </h2>
             </div>
         </section>

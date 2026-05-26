@@ -52,7 +52,6 @@ export default function Navbar() {
       subLinks: [
         { name: "Adhesive Calculator", href: "/tools/adhesive-calculator" },
         { name: "Grout Calculator", href: "/tools/grout-calculator" },
-        { name: "Room Visualizer", href: "/tools/visualizer" },
         { name: "Right Adhesive for you", href: "/tools/selector" }
       ]
     },

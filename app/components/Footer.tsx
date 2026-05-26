@@ -27,9 +27,9 @@ export default function Footer() {
           <div className="flex flex-col gap-6">
             <Link href="/" className="inline-block group w-max">
               <div className="rounded-none transform group-hover:scale-[1.02] transition-transform">
-                <div className="flex gap-2 font-bold items-center font-serif text-white tracking-tight text-xl">
+                <div className="flex gap-2 font-bold items-center font-serif text-white tracking-tight text-lg">
                   <img src="/assest/Logo-aqua-white.png" alt="Aqua Stone Industries Logo" className="h-8 w-auto object-contain" />
-                  AQUA STONE.
+                  AQUA STONE INDUSTRIES
                 </div>
               </div>
             </Link>
