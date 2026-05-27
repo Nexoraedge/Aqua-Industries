@@ -1,12 +1,13 @@
 "use client";
 
-import React, { useRef } from "react";
+import React, { useRef, useState, useEffect } from "react";
 import Link from "next/link";
-import { ArrowRight, Calendar, User, Clock, Bookmark } from "lucide-react";
+import { ArrowRight, Calendar, User, Clock, Bookmark, PenSquare } from "lucide-react";
 import gsap from "gsap";
 import { useGSAP } from "@gsap/react";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 import { articles } from "@/const";
+import { supabase } from "@/lib/supabase";
 
 if (typeof window !== "undefined") {
   gsap.registerPlugin(ScrollTrigger);
@@ -14,8 +15,39 @@ if (typeof window !== "undefined") {
 
 export default function BlogPage() {
   const container = useRef<HTMLDivElement>(null);
+  const [supabaseArticles, setSupabaseArticles] = useState<any[]>([]);
 
+  // Dynamically load any articles written via Supabase Database
+  useEffect(() => {
+    async function fetchArticles() {
+      try {
+        const { data, error } = await supabase
+          .from("articles")
+          .select("*")
+          .order("created_at", { ascending: false });
+          
+        if (data && !error) {
+          const mapped = data.map((art: any) => ({
+            id: art.id,
+            title: art.title,
+            excerpt: art.excerpt,
+            category: art.category,
+            author: art.author,
+            date: art.date,
+            readTime: art.read_time,
+            image: art.image
+          }));
+          setSupabaseArticles(mapped);
+        }
+      } catch (err) {
+        console.warn("Supabase articles omitted. Fallback active.", err);
+      }
+    }
+    fetchArticles();
+  }, []);
 
+  // Merge newly uploaded Supabase articles on top of static engineering mock dispatches
+  const combinedArticles = [...supabaseArticles, ...articles];
 
   useGSAP(() => {
     // Hero Entrance
@@ -34,7 +66,7 @@ export default function BlogPage() {
     );
 
     // Article Grid Reveal
-    gsap.utils.toArray(".article-card").forEach((card: any, i) => {
+    gsap.utils.toArray(".article-card").forEach((card: any) => {
       gsap.fromTo(card,
         { opacity: 0, y: 50 },
         {
@@ -59,10 +91,23 @@ export default function BlogPage() {
             <span className="w-8 h-px bg-stone-300" />
             Knowledge Hub
           </span>
-          <h1 className="hero-element font-serif text-5xl sm:text-7xl lg:text-[6rem] font-light tracking-tighter leading-[0.9] text-stone-950 mb-8">
-            Engineering Resources & <br />
-            <span className="italic font-normal text-stone-400">Technical Insights.</span>
-          </h1>
+          
+          <div className="flex flex-col md:flex-row md:items-end justify-between gap-8 mb-8">
+            <h1 className="hero-element font-serif text-5xl sm:text-7xl lg:text-[6rem] font-light tracking-tighter leading-[0.9] text-stone-950">
+              Engineering Resources & <br />
+              <span className="italic font-normal text-stone-400">Technical Insights.</span>
+            </h1>
+            
+            {/* Admin Writing Desk Link */}
+            <Link 
+              href="/blog/create" 
+              className="hero-element inline-flex items-center justify-center gap-3 bg-brand-950 text-white px-6 py-4 text-[10px] font-bold uppercase tracking-[0.2em] hover:bg-brand-800 transition-all rounded-none group shrink-0 transform hover:scale-[1.02] active:scale-[0.98] shadow-sm"
+            >
+              <PenSquare className="w-4 h-4" />
+              Write Article
+            </Link>
+          </div>
+
           <p className="hero-element text-base sm:text-xl text-stone-500 font-light max-w-2xl leading-relaxed">
             Stay updated with the latest in dry-mix technology, architectural trends, and exact best practices for heavy-duty structural installations.
           </p>
@@ -114,15 +159,15 @@ export default function BlogPage() {
         <div>
           <div className="flex items-center justify-between border-b border-stone-200 pb-4 mb-12">
             <h3 className="text-[10px] font-bold uppercase tracking-[0.3em] text-stone-900">Latest Dispatches</h3>
-            <Link href="#" className="text-[10px] font-mono uppercase tracking-widest text-stone-400 hover:text-stone-900">View Archive</Link>
+            <span className="text-[10px] font-mono uppercase tracking-widest text-stone-400">Total: {combinedArticles.length} entries</span>
           </div>
 
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-            {articles.map((article) => (
+            {combinedArticles.map((article) => (
               <Link
                 href={`/blog/${article.id}`}
                 key={article.id}
-                className="article-card group bg-transparent border border-stone-200 flex flex-col hover:border-stone-900 transition-colors duration-500 rounded-none"
+                className="article-card group bg-transparent border border-stone-200 flex flex-col hover:border-stone-900 transition-colors duration-500 rounded-none overflow-hidden"
               >
                 {/* Image Header */}
                 <div className="h-64 relative overflow-hidden bg-stone-100 p-6 flex items-start justify-end border-b border-stone-200">
@@ -138,10 +183,10 @@ export default function BlogPage() {
                 </div>
 
                 <div className="p-8 flex flex-col flex-grow bg-white">
-                  <h3 className="font-serif text-2xl font-light text-brand-950 mb-4 leading-tight group-hover:text-slate-600 transition-colors tracking-tight">
+                  <h3 className="font-serif text-2xl font-light text-brand-950 mb-4 leading-tight group-hover:text-slate-600 transition-colors tracking-tight line-clamp-2">
                     {article.title}
                   </h3>
-                  <p className="text-sm text-slate-500 font-light leading-relaxed mb-8 flex-grow">
+                  <p className="text-sm text-slate-500 font-light leading-relaxed mb-8 flex-grow line-clamp-3">
                     {article.excerpt}
                   </p>
 

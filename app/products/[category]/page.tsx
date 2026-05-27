@@ -1,9 +1,7 @@
-"use client";
-
-import React, { use } from "react";
-import Link from "next/link";
-import { ArrowRight } from "lucide-react";
+import React from "react";
 import { notFound } from "next/navigation";
+import { Metadata } from "next";
+import CategoryPageClient from "./CategoryPageClient";
 
 // Production Data Model
 const products = [
@@ -68,92 +66,71 @@ const products = [
 ];
 
 const categoryMeta = {
-    "ultima-bond-tile-adhesives": { title: "Tile Adhesives", label: "Ultima Bond Series" },
-    "gripoxy-epoxy-grouts": { title: "Epoxy Grouts", label: "Gripoxy Systems" },
-    "ultima-v-two-grout": { title: "Polymer Grouts", label: "Ultima V-Two Grout" }
+    "ultima-bond-tile-adhesives": { 
+        title: "Premium Tile Adhesives | High-Strength Mortar Systems", 
+        label: "Ultima Bond Series",
+        seoDesc: "Browse our high-performance polymer-modified tile adhesives. Conforming to IS 15477 and EN standards for ceramic, vitrified slabs, and swimming pools."
+    },
+    "gripoxy-epoxy-grouts": { 
+        title: "Epoxy Grouts | 100% Stain-Proof Luxury Tile Fillers", 
+        label: "Gripoxy Systems",
+        seoDesc: "Discover Gripoxy premium three-component epoxy tile grouts. Acid-resistant, waterproof, and ideal for luxury residential and commercial environments."
+    },
+    "ultima-v-two-grout": { 
+        title: "Polymer Grouts | Water-Resistant Joint Mortars", 
+        label: "Ultima V-Two Grout",
+        seoDesc: "Explore Ultima V-Two high-polymer modified tile joint grouts. Ideal for moisture-intense areas like bathroom shower stalls, kitchen walls, and toilets."
+    }
 };
 
-export default function CategoryPage({ params }: { params: Promise<{ category: string }> }) {
-    const resolvedParams = use(params);
-    const slug = resolvedParams.category;
-    const meta = categoryMeta[slug as keyof typeof categoryMeta];
-    const catProducts = products.filter(p => p.categorySlug === slug);
+interface RouteProps {
+    params: Promise<{ category: string }>;
+}
+
+// Highly robust Google SEO dynamic metadata generator
+export async function generateMetadata({ params }: RouteProps): Promise<Metadata> {
+    const resolvedParams = await params;
+    const category = resolvedParams.category;
+    const meta = categoryMeta[category as keyof typeof categoryMeta];
+
+    if (!meta) {
+        return {
+            title: "Architectural Construction Systems | Aqua Stone",
+            description: "Browse Aqua Stone premium grade construction chemicals, tile mortars, and epoxy joint fillers."
+        };
+    }
+
+    return {
+        title: `${meta.title} | Aqua Stone`,
+        description: meta.seoDesc,
+        openGraph: {
+            title: `${meta.title} | Aqua Stone`,
+            description: meta.seoDesc,
+            type: "website"
+        }
+    };
+}
+
+export default async function CategoryPage({ params }: RouteProps) {
+    const resolvedParams = await params;
+    const categorySlug = resolvedParams.category;
+    const meta = categoryMeta[categorySlug as keyof typeof categoryMeta];
+    const catProducts = products.filter(p => p.categorySlug === categorySlug);
 
     if (!meta || catProducts.length === 0) {
         notFound();
     }
 
+    const clientMeta = {
+        title: meta.title.split(" | ")[0], // Keep client header crisp and clean
+        label: meta.label
+    };
+
     return (
-        <div className="bg-[#fcfbf9] min-h-screen selection:bg-brand-900 selection:text-white pb-32 pt-32">
-            <div className="px-6 sm:px-12 max-w-[1400px] mx-auto mt-12">
-                <Link href="/products" className="inline-flex items-center gap-2 text-xs font-bold uppercase tracking-widest text-brand-500 hover:text-brand-950 mb-12 transition-colors">
-                    <ArrowRight className="w-4 h-4 rotate-180" /> Back to Catalog
-                </Link>
-
-                <section>
-                    {/* Category Header */}
-                    <div className="border-b border-brand-900/10 pb-8 mb-16 flex items-end justify-between">
-                        <div>
-                            <span className="text-[10px] font-bold uppercase tracking-[0.25em] text-brand-600 block mb-4">
-                                {meta.label}
-                            </span>
-                            <h1 className="font-serif text-5xl sm:text-7xl lg:text-[7rem] font-light tracking-tighter leading-[0.9] text-brand-950">
-                                {meta.title}
-                            </h1>
-                        </div>
-                        <span className="hidden sm:block text-xs font-mono text-brand-950/30 uppercase tracking-widest">
-                            {catProducts.length} SYSTEM{catProducts.length > 1 ? 'S' : ''}
-                        </span>
-                    </div>
-
-                    {/* Premium Lean Product Grid */}
-                    <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-                        {catProducts.map((prod) => (
-                            <Link
-                                href={`/products/${slug}/${prod.id}`}
-                                key={prod.id}
-                                className="group flex flex-col bg-white border border-brand-900/5 hover:border-brand-200 transition-all duration-500 shadow-[0_2px_10px_rgba(0,0,0,0.02)] hover:shadow-[0_20px_40px_rgba(0,0,0,0.08)] cursor-pointer overflow-hidden"
-                            >
-                                {/* Image Block */}
-                                <div className="h-72 w-full bg-slate-50 flex items-center justify-center p-8 relative overflow-hidden border-b border-brand-900/5">
-                                    <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_center,rgba(0,0,0,0.03)_0%,transparent_70%)] z-0" />
-                                    <img
-                                        src={prod.image}
-                                        alt={prod.name}
-                                        className="h-full object-contain mix-blend-multiply group-hover:scale-110 group-hover:-rotate-2 transition-transform duration-700 relative z-10 drop-shadow-xl"
-                                    />
-                                    <div className="absolute top-4 left-4 z-20">
-                                        <span className="inline-block px-3 py-1 bg-white shadow-sm text-[8px] font-bold uppercase tracking-widest text-brand-600">
-                                            {prod.grade}
-                                        </span>
-                                    </div>
-                                </div>
-
-                                {/* Content Block */}
-                                <div className="p-8 flex flex-col flex-1 justify-between bg-white">
-                                    <div className="mb-8">
-                                        <h3 className="font-serif text-3xl font-light text-brand-950 tracking-tight leading-tight mb-3 group-hover:text-brand-600 transition-colors">
-                                            {prod.name}
-                                        </h3>
-                                        <p className="text-slate-400 font-mono text-[10px] uppercase tracking-[0.2em]">
-                                            {prod.packSize}
-                                        </p>
-                                    </div>
-
-                                    <div className="flex items-center justify-between pt-6 border-t border-slate-100 mt-auto">
-                                        <span className="text-[10px] font-bold uppercase tracking-[0.2em] text-brand-950/40 group-hover:text-brand-950 transition-colors">
-                                            View Details
-                                        </span>
-                                        <div className="w-8 h-8 rounded-full bg-slate-50 flex items-center justify-center group-hover:bg-brand-950 group-hover:text-white transition-all duration-300">
-                                            <ArrowRight className="w-3.5 h-3.5 group-hover:translate-x-0.5 transition-transform" />
-                                        </div>
-                                    </div>
-                                </div>
-                            </Link>
-                        ))}
-                    </div>
-                </section>
-            </div>
-        </div>
+        <CategoryPageClient 
+            categorySlug={categorySlug} 
+            meta={clientMeta} 
+            catProducts={catProducts} 
+        />
     );
 }
