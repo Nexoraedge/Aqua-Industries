@@ -108,7 +108,7 @@ export default function Home_Product_Teaser() {
 
                     {/* BENTO BOX 1: The Massive Featured Adhesive (Col Span 2) */}
                     <Link
-                        href="/products#ultima-bond-2t"
+                        href="/products/ultima-bond-tile-adhesives/ultima-bond-2t"
                         className="bento-box col-span-1 md:col-span-2 lg:col-span-2 bg-[#f2f0ea] border border-[#e5e3db] p-6 sm:p-8 md:p-12 relative flex flex-col md:flex-row items-center justify-between group overflow-hidden shadow-sm hover:shadow-premium transition-shadow duration-500 rounded-none cursor-pointer"
                     >
                         <div className="w-full md:w-1/2 space-y-4 sm:space-y-6 z-10 relative text-left">
@@ -139,7 +139,7 @@ export default function Home_Product_Teaser() {
 
                     {/* BENTO BOX 2: The Tall Dark Contrast Epoxy Card (Row Span 2) */}
                     <Link
-                        href="/products#gripoxy-system"
+                        href="/products/gripoxy-epoxy-grouts/gripoxy-system"
                         className="bento-box col-span-1 md:col-span-2  lg:row-span-2 lg:col-span-1 bg-brand-950 text-white border border-brand-900 p-6 sm:p-8 md:p-10 relative flex flex-col items-center justify-between group overflow-hidden shadow-sm hover:shadow-2xl transition-shadow duration-500 rounded-none cursor-pointer text-center"
                     >
                         {/* Soft background glow */}
@@ -175,7 +175,7 @@ export default function Home_Product_Teaser() {
 
                     {/* BENTO BOX 3: Standard Fix Adhesive (Bottom Row, Col 1) */}
                     <Link
-                        href="/products#ultima-bond-1t"
+                        href="/products/ultima-bond-tile-adhesives/ultima-bond-1t"
                         className="bento-box col-span-1 md:col-span-1 lg:col-span-1 bg-white border border-brand-100 p-6 sm:p-8 flex flex-col justify-between group overflow-hidden shadow-sm hover:shadow-premium transition-shadow duration-500 rounded-none cursor-pointer"
                     >
                         <div className="flex justify-between items-start z-10">
@@ -196,7 +196,7 @@ export default function Home_Product_Teaser() {
 
                     {/* BENTO BOX 4: Heavy Duty Adhesive (Bottom Row, Col 2) */}
                     <Link
-                        href="/products#ultima-bond-3"
+                        href="/products/ultima-bond-tile-adhesives/ultima-bond-3"
                         className="bento-box col-span-1 md:col-span-1 lg:col-span-1 bg-white border border-brand-100 p-6 sm:p-8 flex flex-col justify-between group overflow-hidden shadow-sm hover:shadow-premium transition-shadow duration-500 rounded-none cursor-pointer"
                     >
                         <div className="flex justify-between items-start z-10">

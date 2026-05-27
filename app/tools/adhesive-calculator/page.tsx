@@ -227,7 +227,7 @@ export default function AdhesiveCalculatorPage() {
                                             Reset Parameters
                                         </button>
                                         <a
-                                            href={`https://wa.me/919876543210?text=Hi%20Aqua%20Stone!%20I%20need%20a%20commercial%20quote%20for%20${adhesiveResult.bags}%20bags%20of%20adhesive.`}
+                                            href={`https://wa.me/917877074834?text=Hi%20Aqua%20Stone!%20I%20need%20a%20commercial%20quote%20for%20${adhesiveResult.bags}%20bags%20of%20adhesive.`}
                                             target="_blank"
                                             rel="noopener noreferrer"
                                             className="flex-1 flex items-center justify-center gap-3 bg-emerald-600 hover:bg-emerald-500 text-white py-5 text-[10px] font-bold uppercase tracking-[0.2em] transition-colors rounded-none group"

@@ -6,7 +6,7 @@ import { ArrowLeft, Send, Sparkles, Image, Eye, PenTool, CheckCircle, AlertCircl
 import { supabase } from "@/lib/supabase";
 
 const PRESET_IMAGES = [
-    { name: "Concrete & Raw Stone", url: "https://images.unsplash.com/photo-1541888086425-d81bb19240f5?q=80&w=800&auto=format&fit=crop" },
+    { name: "Concrete & Raw Stone", url: "https://www.polycor.com/wp-content/uploads/2023/02/1-Header-Elevate-Your-Concrete-Project-With-Natural-Stone-Accents.jpg" },
     { name: "Industrial Blueprint", url: "https://images.unsplash.com/photo-1503387762-592deb58ef4e?q=80&w=800&auto=format&fit=crop" },
     { name: "Luxury Tile Laying", url: "https://images.unsplash.com/photo-1584622650111-993a426fbf0a?q=80&w=800&auto=format&fit=crop" },
     { name: "Hydrophobic Pool Mosaic", url: "https://images.unsplash.com/photo-1576013551627-0cc20b96c2a7?q=80&w=800&auto=format&fit=crop" }
@@ -28,7 +28,7 @@ export default function CreateBlogPostPage() {
     const [author, setAuthor] = useState("Aqua Stone R&D");
     const [image, setImage] = useState(PRESET_IMAGES[0].url);
     const [customImage, setCustomImage] = useState("");
-    
+
     // Automation States
     const [readTime, setReadTime] = useState("1 min read");
     const [isPublishing, setIsPublishing] = useState(false);
@@ -83,10 +83,15 @@ export default function CreateBlogPostPage() {
 
         try {
             const { error } = await supabase.from("articles").insert([articleData]);
-            
+
             if (error) {
-                console.error("Supabase error:", error);
-                throw new Error(error.message);
+                console.error("Supabase Detailed Error:", {
+                    message: error.message,
+                    details: error.details,
+                    hint: error.hint,
+                    code: error.code
+                });
+                throw new Error(`${error.message} (Detail: ${error.details || 'None'}, Code: ${error.code})`);
             }
 
             setStatus({
@@ -101,7 +106,7 @@ export default function CreateBlogPostPage() {
         } catch (err: any) {
             setStatus({
                 type: "error",
-                message: `Failed to connect to Supabase: ${err.message || "Unknown error"}. Copy the post JSON below so you do not lose your work!`
+                message: `Failed to publish to Supabase: ${err.message || "Unknown error"}. Make sure you have created the 'articles' table in the Supabase SQL Editor. Copy your draft below so you do not lose your work!`
             });
         } finally {
             setIsPublishing(false);
@@ -130,14 +135,14 @@ export default function CreateBlogPostPage() {
     return (
         <div className="bg-[#F8F7F4] min-h-screen pb-32 text-brand-900 font-sans selection:bg-brand-900 selection:text-white pt-28">
             <div className="max-w-[1300px] mx-auto px-6 sm:px-12">
-                
+
                 {/* Header */}
                 <div className="pt-8 pb-10 border-b border-slate-200 mb-12">
                     <Link href="/blog" className="inline-flex items-center gap-3 text-[10px] font-bold uppercase tracking-[0.2em] text-slate-400 hover:text-brand-900 transition-colors mb-8 group">
                         <ArrowLeft className="w-4 h-4 group-hover:-translate-x-1 transition-transform" />
                         Back to Knowledge Hub
                     </Link>
-                    
+
                     <div className="flex flex-col md:flex-row md:items-end justify-between gap-6">
                         <div>
                             <span className="text-[10px] font-bold uppercase tracking-[0.3em] text-brand-500 block mb-2">Publishing Desk</span>
@@ -145,15 +150,15 @@ export default function CreateBlogPostPage() {
                                 Article <span className="italic font-normal text-slate-500">Creator.</span>
                             </h1>
                         </div>
-                        
+
                         <div className="flex border border-brand-950/10 bg-white p-1 rounded-none shadow-sm">
-                            <button 
+                            <button
                                 onClick={() => setShowPreview(false)}
                                 className={`px-4 py-2 text-[10px] font-bold uppercase tracking-wider transition-all cursor-pointer ${!showPreview ? 'bg-brand-950 text-white' : 'text-slate-500 hover:text-brand-900'}`}
                             >
                                 <PenTool className="w-3.5 h-3.5 inline mr-1.5" /> Editor
                             </button>
-                            <button 
+                            <button
                                 onClick={() => setShowPreview(true)}
                                 className={`px-4 py-2 text-[10px] font-bold uppercase tracking-wider transition-all cursor-pointer ${showPreview ? 'bg-brand-950 text-white' : 'text-slate-500 hover:text-brand-900'}`}
                             >
@@ -164,22 +169,21 @@ export default function CreateBlogPostPage() {
                 </div>
 
                 {status.type !== "idle" && (
-                    <div className={`p-5 mb-10 rounded-none border flex items-start gap-4 ${
-                        status.type === "success" 
-                            ? "bg-emerald-50 border-emerald-200 text-emerald-900" 
-                            : "bg-rose-50 border-rose-200 text-rose-900"
-                    }`}>
+                    <div className={`p-5 mb-10 rounded-none border flex items-start gap-4 ${status.type === "success"
+                        ? "bg-emerald-50 border-emerald-200 text-emerald-900"
+                        : "bg-rose-50 border-rose-200 text-rose-900"
+                        }`}>
                         {status.type === "success" ? <CheckCircle className="w-5 h-5 mt-0.5 shrink-0" /> : <AlertCircle className="w-5 h-5 mt-0.5 shrink-0" />}
                         <div className="flex-1">
                             <span className="font-bold text-xs uppercase tracking-wider block mb-1">
                                 {status.type === "success" ? "System Success" : "Connection Error / Failure"}
                             </span>
                             <p className="text-sm font-light leading-relaxed">{status.message}</p>
-                            
+
                             {status.type === "error" && (
                                 <div className="mt-4 p-3 bg-white border border-rose-100 font-mono text-xs text-slate-600 relative rounded-none max-h-40 overflow-y-auto">
-                                    <button 
-                                        type="button" 
+                                    <button
+                                        type="button"
                                         onClick={copyRawJson}
                                         className="absolute top-2 right-2 p-1.5 bg-slate-100 hover:bg-slate-200 border border-slate-200 cursor-pointer flex items-center gap-1.5 font-sans font-bold uppercase text-[8px] tracking-wider text-slate-600 rounded-none"
                                     >
@@ -195,13 +199,13 @@ export default function CreateBlogPostPage() {
                 {/* Main Workspace */}
                 {!showPreview ? (
                     <form onSubmit={handlePublish} className="grid grid-cols-1 lg:grid-cols-12 gap-8 items-start">
-                        
+
                         {/* Left Column: Post fields */}
                         <div className="lg:col-span-8 bg-white border border-slate-200 p-6 sm:p-8 shadow-sm space-y-6 rounded-none">
                             <h3 className="text-[10px] font-bold uppercase tracking-[0.25em] text-slate-400 border-b border-slate-100 pb-3 mb-6">
                                 01 // Article Specifications
                             </h3>
-                            
+
                             {/* Title field */}
                             <div>
                                 <label className="text-[10px] font-bold uppercase tracking-[0.2em] text-brand-950/60 block mb-2">
@@ -275,7 +279,7 @@ export default function CreateBlogPostPage() {
 
                         {/* Right Column: Settings & Metadata */}
                         <div className="lg:col-span-4 space-y-6">
-                            
+
                             {/* Meta specifications */}
                             <div className="bg-white border border-slate-200 p-6 shadow-sm rounded-none space-y-6">
                                 <h3 className="text-[10px] font-bold uppercase tracking-[0.25em] text-slate-400 border-b border-slate-100 pb-3 mb-4">
@@ -333,11 +337,10 @@ export default function CreateBlogPostPage() {
                                                     setImage(img.url);
                                                     setCustomImage("");
                                                 }}
-                                                className={`p-1.5 border relative group text-left rounded-none overflow-hidden aspect-[4/3] flex flex-col justify-end cursor-pointer ${
-                                                    image === img.url && !customImage
-                                                        ? "border-brand-950 bg-slate-50 ring-1 ring-brand-950"
-                                                        : "border-slate-200 hover:border-slate-400"
-                                                }`}
+                                                className={`p-1.5 border relative group text-left rounded-none overflow-hidden aspect-[4/3] flex flex-col justify-end cursor-pointer ${image === img.url && !customImage
+                                                    ? "border-brand-950 bg-slate-50 ring-1 ring-brand-950"
+                                                    : "border-slate-200 hover:border-slate-400"
+                                                    }`}
                                             >
                                                 <img src={img.url} className="absolute inset-0 w-full h-full object-cover grayscale opacity-60" />
                                                 <div className="absolute inset-0 bg-brand-950/20" />
@@ -379,7 +382,7 @@ export default function CreateBlogPostPage() {
                                 <p className="text-[11px] text-slate-400 leading-relaxed font-light relative z-10">
                                     Your article will be inserted directly into the Supabase database and rendered on the live Knowledge Hub feed.
                                 </p>
-                                
+
                                 <button
                                     type="submit"
                                     disabled={isPublishing}
@@ -396,7 +399,7 @@ export default function CreateBlogPostPage() {
                     /* Real-time Dynamic Live Preview Rendering Panel (luxury editorial page clone) */
                     <div className="bg-[#FAF9F6] p-6 sm:p-12 border border-slate-200 shadow-sm relative rounded-none">
                         <div className="max-w-[1000px] mx-auto pt-4 pb-8">
-                            
+
                             <div className="flex flex-wrap items-center gap-4 text-[9px] font-mono uppercase tracking-widest text-slate-500 mb-6">
                                 <span className="bg-brand-950 text-white px-2.5 py-1 font-sans font-bold tracking-[0.2em] rounded-none">
                                     {category}
@@ -442,8 +445,8 @@ export default function CreateBlogPostPage() {
                                 prose-blockquote:border-l-4 prose-blockquote:border-brand-950 prose-blockquote:bg-slate-100 prose-blockquote:p-6 prose-blockquote:font-serif prose-blockquote:text-lg prose-blockquote:italic prose-blockquote:text-brand-900 prose-blockquote:my-6
                                 [&_img]:w-full [&_img]:h-48 sm:[&_img]:h-80 [&_img]:object-cover [&_img]:border [&_img]:border-slate-200 [&_img]:my-6
                                 [&_span]:block [&_span]:text-center [&_span]:text-[10px] [&_span]:text-slate-400 [&_span]:font-mono [&_span]:uppercase [&_span]:tracking-wider [&_span]:mb-6 [&_span]:mt-[-1rem]"
-                                dangerouslySetInnerHTML={{ 
-                                    __html: content.replace(/\n/g, "<br />") || "<p class='text-slate-400 italic font-mono'>Content draft is currently empty. Use the Editor tab to start writing...</p>" 
+                                dangerouslySetInnerHTML={{
+                                    __html: content.replace(/\n/g, "<br />") || "<p class='text-slate-400 italic font-mono'>Content draft is currently empty. Use the Editor tab to start writing...</p>"
                                 }}
                             />
                         </div>

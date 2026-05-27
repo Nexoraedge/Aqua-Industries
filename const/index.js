@@ -64,7 +64,7 @@ export  const articles = [
       author: "Aqua Stone R&D",
       date: "May 12, 2026",
       readTime: "6 min read",
-      image: "https://images.unsplash.com/photo-1541888086425-d81bb19240f5?q=80&w=800&auto=format&fit=crop"
+      image: "https://www.polycor.com/wp-content/uploads/2023/02/1-Header-Elevate-Your-Concrete-Project-With-Natural-Stone-Accents.jpg"
     },
     {
       id: "how-much-adhesive",
@@ -74,7 +74,7 @@ export  const articles = [
       author: "Logistics Team",
       date: "April 28, 2026",
       readTime: "4 min read",
-      image: "https://images.unsplash.com/photo-1503387762-592deb58ef4e?q=80&w=800&auto=format&fit=crop"
+      image: "https://www.polycor.com/wp-content/uploads/2023/02/1-Header-Elevate-Your-Concrete-Project-With-Natural-Stone-Accents.jpg"
     },
     {
       id: "swimming-pool-tiling",
@@ -106,9 +106,9 @@ export  const articles = [
               "High slip resistance for vertical applications."
           ],
           applicationAreas: [
-              { text: "Floor and Wall tiles of small sizes", image: "/hero_small_architecture_1779022130822.png" },
-              { text: "12\" x 18\", 1\" x 1\", 2\" x 2\" Ceramic Tiles", image: "/hero_small_architecture_1779022130822.png" },
-              { text: "Interior & Exterior Use", image: "/hero_small_architecture_1779022130822.png" }
+              { text: "Floor and Wall tiles of small sizes", image: "/hero_arch.png" },
+              { text: "12\" x 18\", 1\" x 1\", 2\" x 2\" Ceramic Tiles", image: "/hero_small_bags.png" },
+              { text: "Interior & Exterior Use", image: "/hero_small_construction.png" }
           ],
           testReport: {
               classification: "Type-1T",
@@ -140,10 +140,10 @@ export  const articles = [
               "High slip resistance for vertical applications."
           ],
           applicationAreas: [
-              { text: "Floor and Wall tiles of small to medium sizes", image: "/hero_small_architecture_1779022130822.png" },
-              { text: "2\" x 4\", 2.5\" x 5\" Ceramic tiles", image: "/hero_small_architecture_1779022130822.png" },
-              { text: "Interior & Exterior Use", image: "/hero_small_architecture_1779022130822.png" },
-              { text: "Water Resistant Areas", image: "/hero_small_architecture_1779022130822.png" }
+              { text: "Floor and Wall tiles of small to medium sizes", image: "/hero_arch.png" },
+              { text: "2\" x 4\", 2.5\" x 5\" Ceramic tiles", image: "/hero_bg_adhesive.png" },
+              { text: "Interior & Exterior Use", image: "/hero_small_construction.png" },
+              { text: "Water Resistant Areas", image: "/hero_warehouse.png" }
           ],
           testReport: {
               classification: "Type-2T",
@@ -175,10 +175,10 @@ export  const articles = [
               "High slip resistance for vertical application."
           ],
           applicationAreas: [
-              { text: "Large format tiles", image: "/hero_small_architecture_1779022130822.png" },
-              { text: "Marble, Granite, Stone", image: "/hero_small_architecture_1779022130822.png" },
-              { text: "Cladding and heavy exterior use", image: "/hero_small_architecture_1779022130822.png" },
-              { text: "Interior & Exterior Use", image: "/hero_small_architecture_1779022130822.png" }
+              { text: "Large format tiles", image: "/hero_bg_adhesive.png" },
+              { text: "Marble, Granite, Stone", image: "/hero_arch.png" },
+              { text: "Cladding and heavy exterior use", image: "/hero_small_construction.png" },
+              { text: "Interior & Exterior Use", image: "/hero_warehouse.png" }
           ],
           testReport: {
               classification: "Type-3",
@@ -209,10 +209,10 @@ export  const articles = [
               "Extremely easy to clean."
           ],
           applicationAreas: [
-              { text: "Kitchen backsplashes", image: "/hero_small_architecture_1779022130822.png" },
-              { text: "Bathroom and shower floors", image: "/hero_small_architecture_1779022130822.png" },
-              { text: "Swimming pools", image: "/hero_small_architecture_1779022130822.png" },
-              { text: "Heavy commercial traffic areas", image: "/hero_small_architecture_1779022130822.png" }
+              { text: "Kitchen backsplashes", image: "/hero_arch.png" },
+              { text: "Bathroom and shower floors", image: "/hero_bg_adhesive.png" },
+              { text: "Swimming pools", image: "/hero_small_construction.png" },
+              { text: "Heavy commercial traffic areas", image: "/hero_warehouse.png" }
           ],
           testReport: {
               classification: "Epoxy",
@@ -243,9 +243,9 @@ export  const articles = [
               "Easy to apply with a grout float or sponge."
           ],
           applicationAreas: [
-              { text: "Kitchen and bathroom walls", image: "/hero_small_architecture_1779022130822.png" },
-              { text: "Shower stalls and toilets", image: "/hero_small_architecture_1779022130822.png" },
-              { text: "Ceramic and vitrified floor joints", image: "/hero_small_architecture_1779022130822.png" }
+              { text: "Kitchen and bathroom walls", image: "/hero_arch.png" },
+              { text: "Shower stalls and toilets", image: "/hero_bg_adhesive.png" },
+              { text: "Ceramic and vitrified floor joints", image: "/hero_small_construction.png" }
           ],
           testReport: {
               classification: "Polymer",

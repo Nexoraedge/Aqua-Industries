@@ -77,7 +77,7 @@ export default function Product_Interface() {
               className={`group relative flex flex-col bg-gradient-to-br ${category.color} border ${category.border} overflow-hidden shadow-[0_4px_24px_rgba(0,0,0,0.02)] hover:shadow-[0_20px_40px_rgba(0,0,0,0.08)] transition-all duration-700 ease-out p-10 sm:p-14`}
             >
               {/* Massive Watermark Number */}
-              <div className="absolute top-0 right-7 md:right-10 text-[100px] sm:text-[180px] font-serif font-black text-white/80 leading-none -translate-y-1/4 translate-x-1/4 select-none mix-blend-overlay pointer-events-none">
+              <div className="absolute top-2 right-7 md:right-11 text-[100px] sm:text-[180px] font-serif font-black text-white/80 leading-none -translate-y-1/4 translate-x-1/4 select-none mix-blend-overlay pointer-events-none">
                 0{index + 1}
               </div>
 
@@ -146,8 +146,8 @@ export default function Product_Interface() {
               Confused about chemical grades and substrates? Run our fast, 3-step diagnostic wizard to match your exact parameters with the perfect mortar system.
             </p>
           </div>
-          <Link 
-            href="/tools/selector" 
+          <Link
+            href="/tools/selector"
             className="relative z-10 bg-white text-brand-950 px-8 py-5 text-[10px] font-bold uppercase tracking-[0.2em] hover:bg-slate-200 transition-all rounded-none group shrink-0 flex items-center gap-3 transform hover:scale-[1.02] active:scale-[0.98]"
           >
             Launch Adhesive Selector

@@ -73,7 +73,7 @@ export default function AdhesiveSelectorPage() {
     const calculateResult = (finalState: QuizState) => {
         // Logic mapping
         const { area, tile, substrate } = finalState;
-        
+
         let recommended = {
             name: "GripTite Series",
             type: "IS 15477:2019 Type 1",
@@ -112,7 +112,7 @@ export default function AdhesiveSelectorPage() {
                 <p className="text-sm text-slate-500 font-light leading-relaxed">Select the primary environmental zone for your architectural project.</p>
             </div>
             {/* Strict 4-Grid Layout across all breakpoints, including mobile */}
-            <div className="grid grid-cols-4 gap-2 sm:gap-6">
+            <div className="grid grid-cols-2 gap-2 sm:gap-6">
                 {[
                     { id: "interior_floor", label: "Interior Floor", icon: LayoutDashboard },
                     { id: "interior_wall", label: "Interior Wall", icon: Building2 },
@@ -227,7 +227,7 @@ export default function AdhesiveSelectorPage() {
 
                 <div className="bg-brand-950 border border-brand-800 p-8 sm:p-14 relative overflow-hidden rounded-none">
                     <div className="absolute inset-0 bg-[radial-gradient(circle_at_top_right,rgba(255,255,255,0.05)_0%,transparent_50%)] pointer-events-none" />
-                    
+
                     <div className="relative z-10">
                         <CheckCircle2 className="w-10 h-10 text-white mb-6 opacity-90" />
                         <h3 className="font-serif text-4xl sm:text-5xl lg:text-6xl font-light tracking-tighter text-white mb-4">{result.name}</h3>
@@ -267,7 +267,7 @@ export default function AdhesiveSelectorPage() {
     return (
         <div ref={containerRef} className="bg-[#F8F7F4] min-h-screen pb-30 text-brand-900 font-sans selection:bg-brand-900 selection:text-white pt-28">
             <div className="max-w-[1200px] mx-auto px-6 sm:px-12">
-                
+
                 {/* Header (tighter padding & margin) */}
                 <div className="fade-up pt-8 pb-10 border-b border-slate-200 mb-10">
                     <Link href="/tools" className="inline-flex items-center gap-3 text-[10px] font-bold uppercase tracking-[0.2em] text-slate-400 hover:text-brand-900 transition-colors mb-8 group">

@@ -327,7 +327,7 @@ export default function WhyUsPage() {
                   View Specs
                 </Link>
                 <a
-                  href={`https://wa.me/919876543210?text=Hi%20Aqua%20Stone%20Company!%20I%20used%20your%20Direct%20Volume%20Estimator%20and%20need%20a%20quote%20for%20${bagQuantity}%20bags%20(${bagQuantity * 20 / 1000} tons).%20Please%20send%20corporate%20price%20sheet.`}
+                  href={`https://wa.me/917877074834?text=Hi%20Aqua%20Stone%20Company!%20I%20used%20your%20Direct%20Volume%20Estimator%20and%20need%20a%20quote%20for%20${bagQuantity}%20bags%20(${bagQuantity * 20 / 1000} tons).%20Please%20send%20corporate%20price%20sheet.`}
                   target="_blank"
                   rel="noopener noreferrer"
                   className="flex-1 flex items-center justify-center gap-3 bg-white text-brand-950 hover:bg-slate-200 py-4 rounded-full text-[10px] font-bold uppercase tracking-[0.2em] transition-all transform hover:scale-[1.02] active:scale-[0.98]"

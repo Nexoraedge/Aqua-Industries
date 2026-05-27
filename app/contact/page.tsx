@@ -28,7 +28,7 @@ export default function ContactPage() {
 
     return (
         <div ref={pageRef} className="bg-[#F5F4F0] min-h-screen text-brand-900 font-sans selection:bg-brand-900 selection:text-white pb-24 lg:pb-32 overflow-hidden">
-            
+
             {/* ================= HERO SECTION ================= */}
             <section className="relative pt-36 pb-16 lg:pt-48 lg:pb-24 px-6 sm:px-12 max-w-[1400px] mx-auto border-b border-slate-300">
                 <div className="max-w-4xl relative z-10">
@@ -49,13 +49,13 @@ export default function ContactPage() {
             {/* ================= MAIN CONTENT ================= */}
             <section className="px-6 sm:px-12 max-w-[1400px] mx-auto mt-16 lg:mt-24">
                 <div className="grid grid-cols-1 lg:grid-cols-12 gap-16 lg:gap-24 relative">
-                    
+
                     {/* Abstract Background Typography */}
                     <div className="absolute top-0 right-0 text-[180px] font-serif font-black text-slate-200/50 leading-none -translate-y-1/2 -z-10 select-none tracking-tighter hidden lg:block">HQ</div>
 
                     {/* Left: Contact Details */}
                     <div className="lg:col-span-5 space-y-16 pt-4">
-                        
+
                         <div className="contact-block group">
                             <h3 className="text-[10px] font-bold uppercase tracking-[0.3em] text-slate-400 mb-6 flex items-center gap-3">
                                 <MapPin className="w-4 h-4" /> Global Headquarters
@@ -97,21 +97,21 @@ export default function ContactPage() {
 
                     {/* Right: Brutalist Action Blocks */}
                     <div className="lg:col-span-7 space-y-6">
-                        
+
                         {/* WhatsApp Action */}
                         <div className="contact-block bg-brand-950 text-white p-10 sm:p-16 lg:p-20 relative overflow-hidden group hover:bg-brand-900 transition-colors duration-500 border border-brand-800 shadow-2xl block">
                             <div className="absolute inset-0 bg-[linear-gradient(rgba(255,255,255,0.03)_1px,transparent_1px),linear-gradient(90deg,rgba(255,255,255,0.03)_1px,transparent_1px)] bg-[size:2rem_2rem] opacity-20 pointer-events-none" />
-                            
+
                             <h3 className="relative z-10 text-[10px] font-bold uppercase tracking-[0.3em] text-brand-400 mb-8 block">Rapid Quotes</h3>
                             <h2 className="relative z-10 font-serif text-4xl sm:text-5xl font-light tracking-tight mb-6">WhatsApp Direct</h2>
                             <p className="relative z-10 text-slate-400 font-light text-sm sm:text-base leading-relaxed mb-12 max-w-sm">
                                 Connect instantly with our sales engineers for priority B2B support, instant estimations, and technical clarification.
                             </p>
 
-                            <a href="https://wa.me/919876543210" target="_blank" rel="noopener noreferrer" className="relative z-10 inline-flex items-center gap-4 bg-white text-brand-950 px-8 py-5 text-[10px] font-bold uppercase tracking-[0.2em] hover:bg-slate-200 transition-all transform hover:scale-[1.02] active:scale-[0.98]">
+                            <a href="https://wa.me/917877074834" target="_blank" rel="noopener noreferrer" className="relative z-10 inline-flex items-center gap-4 bg-white text-brand-950 px-8 py-5 text-[10px] font-bold uppercase tracking-[0.2em] hover:bg-slate-200 transition-all transform hover:scale-[1.02] active:scale-[0.98]">
                                 Start Secure Chat <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
                             </a>
-                            
+
                             {/* Abstract Icon Watermark */}
                             <Phone className="absolute right-0 bottom-0 w-64 h-64 text-white opacity-5 transform translate-x-12 translate-y-12 group-hover:scale-110 transition-transform duration-700" />
                         </div>

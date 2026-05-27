@@ -11,6 +11,46 @@ if (typeof window !== "undefined") {
     gsap.registerPlugin(ScrollTrigger);
 }
 
+// B2B engineering recommendations helper for dynamic cards (condensed and clean)
+const getApplicationAdvice = (productName: string, areaText: string) => {
+    const normArea = areaText.toLowerCase();
+
+    if (normArea.includes("kitchen") || normArea.includes("backsplash")) {
+        return {
+            prep: "Flat, grease-free subfloor. 28-day plaster curing.",
+            method: "6mm Notch trowel. Double-butter tiles for full bond.",
+            grout: "Gripoxy® Epoxy Grout (100% grease & water proof)."
+        };
+    }
+    if (normArea.includes("pool") || normArea.includes("water") || normArea.includes("shower") || normArea.includes("toilet") || normArea.includes("bath")) {
+        return {
+            prep: "Tested waterproof layer, 12-day pond testing.",
+            method: "Deformable S1 mortar with 10mm notches.",
+            grout: "Gripoxy / GroutMax (Chlorine & chemical resistant)."
+        };
+    }
+    if (normArea.includes("large") || normArea.includes("marble") || normArea.includes("granite") || normArea.includes("stone") || normArea.includes("cladding")) {
+        return {
+            prep: "Rigid subfloor, zero deflection. Clean backing dust.",
+            method: "Double-spread mortar. Tap with mallets & levellers.",
+            grout: "Leave 3mm expansion joints. Fill with polymer silicone."
+        };
+    }
+    if (normArea.includes("commercial") || normArea.includes("traffic") || normArea.includes("floor")) {
+        return {
+            prep: "Concrete screed cured. Thorough dust vacuuming.",
+            method: "12mm heavy notched trowel for heavy cargo support.",
+            grout: "High-performance grout (high abrasion resistance)."
+        };
+    }
+    // Default fallback
+    return {
+        prep: "Stable, dry surface. Free of dust and grease aggregates.",
+        method: "Use standard recommended trowel and twist tile firmly.",
+        grout: "Seal joints with high-performance polymer grout."
+    };
+};
+
 // --- COMPONENTS ---
 
 const FAQAccordion = ({ faqs }: { faqs: { q: string, a: string }[] }) => {
@@ -131,6 +171,7 @@ interface ProductDetailPageClientProps {
 export default function ProductDetailPageClient({ categorySlug, product, relatedProducts }: ProductDetailPageClientProps) {
     const isAdhesive = product?.categorySlug === 'ultima-bond-tile-adhesives';
     const isEpoxy = product?.categorySlug === 'gripoxy-epoxy-grouts';
+    const [flippedIndex, setFlippedIndex] = useState<number | null>(null);
 
     // GSAP Container Ref
     const container = useRef<HTMLDivElement>(null);
@@ -261,25 +302,104 @@ export default function ProductDetailPageClient({ categorySlug, product, related
                             <div className="grid grid-cols-2 md:grid-cols-4 gap-4 mb-8 auto-rows-fr">
                                 {product.applicationAreas.map((area: any, idx: number) => {
                                     const total = product.applicationAreas.length;
-                                    let bentoClass = "col-span-1 aspect-square"; // fallback
+                                    let bentoClass = "col-span-2 h-[180px] sm:h-[220px]";
 
                                     if (total === 4) {
-                                        if (idx === 0) bentoClass = "col-span-2 md:col-span-2 md:row-span-2 min-h-[250px] md:min-h-[400px]";
-                                        else if (idx === 1) bentoClass = "col-span-2 md:col-span-2 md:row-span-1 min-h-[150px] md:min-h-[192px]";
-                                        else bentoClass = "col-span-1 md:col-span-1 md:row-span-1 min-h-[150px] md:min-h-[192px]";
+                                        if (idx === 0) bentoClass += " md:col-span-2 md:row-span-2 md:h-[450px]";
+                                        else if (idx === 1) bentoClass += " md:col-span-2 md:row-span-1 md:h-[217px]";
+                                        else bentoClass += " md:col-span-1 md:row-span-1 md:h-[217px]";
                                     } else if (total === 3) {
-                                        if (idx === 0) bentoClass = "col-span-2 md:col-span-2 md:row-span-2 min-h-[250px] md:min-h-[400px]";
-                                        else bentoClass = "col-span-1 md:col-span-1 md:row-span-2 min-h-[200px] md:min-h-[400px]";
+                                        if (idx === 0) bentoClass += " md:col-span-2 md:row-span-2 md:h-[450px]";
+                                        else bentoClass += " md:col-span-1 md:row-span-2 md:h-[450px]";
                                     }
 
                                     return (
-                                        <div key={idx} className={`relative bg-slate-200 overflow-hidden shadow-md group rounded-none ${bentoClass}`}>
-                                            <img src={area.image || "/hero_small_architecture_1779022130822.png"} alt={area.text} className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700 ease-out" />
-                                            <div className="absolute inset-0 bg-gradient-to-t from-brand-950/90 via-brand-950/40 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
-                                            <div className="absolute inset-0 p-6 flex flex-col justify-end opacity-0 group-hover:opacity-100 translate-y-4 group-hover:translate-y-0 transition-all duration-500 ease-out">
-                                                <span className="text-white text-[10px] sm:text-xs font-bold uppercase tracking-widest drop-shadow-lg max-w-[80%]">
+                                        <div 
+                                            key={idx} 
+                                            onClick={() => setFlippedIndex(flippedIndex === idx ? null : idx)}
+                                            className={`relative bg-slate-200 overflow-hidden shadow-md group rounded-none cursor-pointer transform hover:scale-[1.01] active:scale-[0.99] transition-all duration-300 ${bentoClass}`}
+                                        >
+                                            <img src={area.image || "/hero_arch.png"} alt={area.text} className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700 ease-out" />
+                                            {/* Permanent subtle gradient for default readability, gets darker and richer on hover */}
+                                            <div className="absolute inset-0 bg-gradient-to-t from-brand-950/70 via-brand-950/20 to-transparent group-hover:from-brand-950/85 transition-colors duration-500" />
+                                            
+                                            {/* Content container - always visible, slides up slightly on hover */}
+                                            <div className="absolute inset-0 p-4 sm:p-6 flex flex-col justify-end translate-y-0 group-hover:-translate-y-1 transition-all duration-500 ease-out">
+                                                <span className="text-white text-[10px] sm:text-xs font-bold uppercase tracking-wider drop-shadow-sm max-w-full leading-relaxed mb-1 block">
                                                     {area.text}
                                                 </span>
+                                                {/* Micro B2B prompt link */}
+                                                <span className="text-brand-300 text-[8px] font-mono uppercase tracking-widest opacity-80 group-hover:opacity-100 group-hover:text-brand-200 transition-all flex items-center gap-1.5 mt-1">
+                                                    Click for Details <ArrowRight className="w-2.5 h-2.5 group-hover:translate-x-0.5 transition-transform" />
+                                                </span>
+                                            </div>
+
+                                            {/* Dynamic Flipped Card In-Place Details Overlay */}
+                                            <div 
+                                                className={`absolute inset-0 bg-brand-950/95 p-5 sm:p-6 flex flex-col justify-between z-20 text-white backdrop-blur-sm transition-all duration-500 ease-[cubic-bezier(0.25,1,0.5,1)] ${
+                                                    flippedIndex === idx 
+                                                        ? "translate-y-0 opacity-100 pointer-events-auto" 
+                                                        : "translate-y-full opacity-0 pointer-events-none"
+                                                }`}
+                                            >
+                                                {/* Header */}
+                                                <div className="flex justify-between items-start border-b border-white/10 pb-1">
+                                                    <div>
+                                                        <span className="text-[7px] sm:text-[8px] font-mono uppercase tracking-[0.2em] text-brand-400 block mb-0.5">Tiling Specification</span>
+                                                        <h4 className="font-serif text-xs sm:text-sm text-white font-light tracking-tight line-clamp-1 leading-tight">{area.text}</h4>
+                                                    </div>
+                                                    <button 
+                                                        onClick={(e) => {
+                                                            e.stopPropagation(); // Avoid toggling back and forth on click
+                                                            setFlippedIndex(null);
+                                                        }}
+                                                        className="text-white/60 hover:text-white p-1 hover:scale-110 active:scale-95 transition-all cursor-pointer"
+                                                        aria-label="Back to image"
+                                                    >
+                                                        <svg className="w-3.5 h-3.5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                                            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2.5} d="M6 18L18 6M6 6l12 12" />
+                                                        </svg>
+                                                    </button>
+                                                </div>
+
+                                                {/* Engineering details - extremely clean bullet points */}
+                                                {(() => {
+                                                    const advice = getApplicationAdvice(product.name, area.text);
+                                                    return (
+                                                        <div className="flex-grow flex flex-col justify-center space-y-3.5 my-3 text-[10px] sm:text-[11px] font-light text-slate-300 leading-relaxed">
+                                                            <div className="flex gap-2.5 items-start">
+                                                                <span className="text-brand-400 font-mono text-[9px] mt-0.5 shrink-0">●</span>
+                                                                <p className="line-clamp-2"><strong className="text-white font-medium">Surface:</strong> {advice.prep}</p>
+                                                            </div>
+                                                            <div className="flex gap-2.5 items-start">
+                                                                <span className="text-brand-400 font-mono text-[9px] mt-0.5 shrink-0">●</span>
+                                                                <p className="line-clamp-2"><strong className="text-white font-medium">Trowel:</strong> {advice.method}</p>
+                                                            </div>
+                                                            <div className="flex gap-2.5 items-start">
+                                                                <span className="text-brand-400 font-mono text-[9px] mt-0.5 shrink-0">●</span>
+                                                                <p className="line-clamp-2"><strong className="text-white font-medium">Grout:</strong> {advice.grout}</p>
+                                                            </div>
+                                                        </div>
+                                                    );
+                                                })()}
+
+                                                {/* Footer */}
+                                                <div className="pt-1.5 border-t border-white/10 flex items-center justify-between text-[7px] sm:text-[8px] font-mono uppercase tracking-widest text-slate-400">
+                                                    <span>Click to close</span>
+                                                    {isAdhesive && (
+                                                        <a 
+                                                            href="#calculator-section"
+                                                            onClick={(e) => {
+                                                                e.stopPropagation();
+                                                                setFlippedIndex(null);
+                                                                document.getElementById("calculator-section")?.scrollIntoView({ behavior: "smooth" });
+                                                            }}
+                                                            className="text-brand-300 hover:text-brand-200 transition-colors flex items-center gap-0.5"
+                                                        >
+                                                            Calculator →
+                                                        </a>
+                                                    )}
+                                                </div>
                                             </div>
                                         </div>
                                     );
@@ -311,7 +431,7 @@ export default function ProductDetailPageClient({ categorySlug, product, related
 
                 {/* Full Width Calculator Banner (Only for Adhesives) */}
                 {isAdhesive && (
-                    <div className="scroll-section">
+                    <div id="calculator-section" className="scroll-section">
                         <AdvancedCoverageCalculator />
                     </div>
                 )}
@@ -321,21 +441,45 @@ export default function ProductDetailPageClient({ categorySlug, product, related
                     <div className="scroll-section mb-16 relative pt-16 border-t border-slate-200">
                         <div className="absolute top-0 right-0 text-[150px] font-serif font-black text-slate-50 leading-none -translate-y-1/2 -z-10 select-none tracking-tighter pointer-events-none">02</div>
 
-                        <div className="flex flex-col lg:flex-row lg:items-end justify-between mb-16 gap-8 bg-brand-950 p-12 lg:p-16 text-white shadow-2xl relative overflow-hidden rounded-none">
+                        <div className="flex flex-col lg:flex-row lg:items-end justify-between mb-16 gap-8 bg-brand-950 p-6 sm:p-12 lg:p-16 text-white shadow-2xl relative overflow-hidden rounded-none">
                             <div className="absolute inset-0 bg-white/5 opacity-10 mix-blend-overlay pointer-events-none" />
                             <div className="relative z-10 max-w-2xl">
                                 <h3 className="text-[10px] font-bold uppercase tracking-[0.3em] text-brand-400 mb-4">Official Documentation</h3>
                                 <h2 className="font-serif text-4xl sm:text-5xl mb-6 tracking-tight">Technical Data Sheet</h2>
                                 <p className="text-slate-400 font-light text-lg">Tested against IS 15477: 2019 standards. Official lab results for engineering and architectural approval.</p>
                             </div>
-                            <a href="/assest/report-placeholder.jpg" download className="relative z-10 inline-flex items-center justify-center gap-3 bg-brand-500 text-white px-10 py-5 text-xs font-bold uppercase tracking-[0.2em] hover:bg-brand-600 hover:shadow-2xl hover:-translate-y-1 transition-all shrink-0 group rounded-none">
-                                <Download className="w-5 h-5 group-hover:-translate-y-1 transition-transform" />
-                                Download Official Report
+                            <a href="/assest/report-placeholder.jpg" download className="relative z-10 inline-flex items-center justify-center gap-3 bg-brand-500 text-white px-6 py-4 sm:px-10 sm:py-5 text-xs font-bold uppercase tracking-[0.2em] hover:bg-brand-600 hover:shadow-2xl hover:-translate-y-1 transition-all shrink-0 group rounded-none w-full sm:w-auto text-center">
+                                <Download className="w-4 h-4 sm:w-5 sm:h-5 group-hover:-translate-y-1 transition-transform shrink-0" />
+                                <span className="w-full">Download Official Report</span>
                             </a>
                         </div>
 
-                        {/* Premium Data Table */}
-                        <div className="bg-white border border-slate-200 shadow-sm overflow-x-auto rounded-none">
+                        {/* Premium Specs Grid for Mobile (md:hidden) */}
+                        <div className="block md:hidden space-y-4 mb-8">
+                            {[
+                                { name: "Tensile Adhesion (Dry)", method: "IS: 15477:2019 Annex A", result: `${product.testReport.tensileDry} N/mm²` },
+                                { name: "Tensile Adhesion (Wet)", method: "IS: 15477:2019 Annex A", result: `${product.testReport.tensileWet} ${product.testReport.tensileWet !== "N/A" ? "N/mm²" : ""}` },
+                                { name: "Shear Adhesion (Dry)", method: "IS: 15477:2019 Annex B", result: `${product.testReport.shearDry} N/mm²` },
+                                { name: "Open Time", method: "IS: 15477:2019 Annex C", result: `${product.testReport.openTime} Min` },
+                                { name: "Slip Resistance", method: "IS: 15477:2019 Annex E", result: `${product.testReport.slip} mm` }
+                            ].map((spec, index) => (
+                                <div key={index} className="bg-white border border-slate-200 p-5 flex flex-col justify-between rounded-none shadow-sm gap-3">
+                                    <div>
+                                        <span className="block text-[8px] font-mono text-slate-400 uppercase tracking-widest mb-1">{spec.method}</span>
+                                        <h4 className="font-serif text-sm font-light text-brand-950">{spec.name}</h4>
+                                    </div>
+                                    <div className="flex justify-between items-center pt-3 border-t border-slate-100">
+                                        <span className="text-[9px] font-bold uppercase tracking-widest text-slate-400">Result</span>
+                                        <span className="bg-brand-50 text-brand-950 font-mono text-[11px] font-bold px-3 py-1.5 border border-brand-100">
+                                            {spec.result}
+                                        </span>
+                                    </div>
+                                </div>
+                            ))}
+                        </div>
+
+                        {/* Premium Data Table for Desktop (hidden md:block) */}
+                        <div className="hidden md:block bg-white border border-slate-200 shadow-sm overflow-x-auto rounded-none">
                             <table className="w-full text-left min-w-[800px]">
                                 <thead>
                                     <tr className="bg-slate-50 border-b border-slate-200">
@@ -401,6 +545,7 @@ export default function ProductDetailPageClient({ categorySlug, product, related
                 </div>
 
             </div>
+
         </div>
     );
 }

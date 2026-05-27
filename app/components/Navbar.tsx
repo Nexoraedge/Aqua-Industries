@@ -58,7 +58,7 @@ export default function Navbar() {
     { name: "Why Choose Us", href: "/why-us" },
     { name: "Certifications", href: "/certifications" },
     { name: "Knowledge Hub", href: "/blog" },
-    { name: "Contact HQ", href: "/contact" },
+
   ];
 
   const menuVariants: Variants = {
@@ -280,8 +280,8 @@ export default function Navbar() {
                       Mansarovar, Jaipur, Rajasthan - 302020
                     </div>
                     <div className="flex flex-col gap-1">
-                      <a href="tel:+919876543210" className="text-white hover:text-brand-400 font-bold text-lg sm:text-xl transition-colors w-max">
-                        +91 98765 43210
+                      <a href="tel:+917877074834" className="text-white hover:text-brand-400 font-bold text-lg sm:text-xl transition-colors w-max">
+                        +91 78770 74834
                       </a>
                       <a href="mailto:info@aquastonecompany.com" className="text-brand-400 hover:text-white text-xs sm:text-sm transition-colors w-max">
                         info@aquastonecompany.com

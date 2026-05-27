@@ -109,8 +109,8 @@ export default function Footer() {
               </li>
               <li className="flex items-center gap-4">
                 <Phone className="w-5 h-5 text-slate-500 shrink-0" />
-                <a href="tel:+919876543210" className="hover:text-white transition-colors">
-                  +91 98765 43210
+                <a href="tel:+917877074834" className="hover:text-white transition-colors">
+                  +91 78770 74834
                 </a>
               </li>
               <li className="flex items-center gap-4">
@@ -122,7 +122,7 @@ export default function Footer() {
             </ul>
             <div className="mt-4">
               <a
-                href="https://wa.me/919876543210?text=Hi%20Aqua%20Stone%20Company,%20I%20am%20interested%20in%20your%20tile%20adhesive%20products."
+                href="https://wa.me/917877074834?text=Hi%20Aqua%20Stone%20Company,%20I%20am%20interested%20in%20your%20tile%20adhesive%20products."
                 target="_blank"
                 rel="noopener noreferrer"
                 className="w-full flex items-center justify-center gap-3 bg-white text-brand-950 hover:bg-slate-200 py-4 rounded-none text-[10px] font-bold uppercase tracking-[0.2em] transition-colors group"

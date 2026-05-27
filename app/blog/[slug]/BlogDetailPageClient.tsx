@@ -13,18 +13,57 @@ if (typeof window !== "undefined") {
     gsap.registerPlugin(ScrollTrigger);
 }
 
+const FALLBACK_IMAGE = "https://www.polycor.com/wp-content/uploads/2023/02/1-Header-Elevate-Your-Concrete-Project-With-Natural-Stone-Accents.jpg";
+
 interface BlogDetailPageClientProps {
     slug: string;
-    staticArticle: any;
+    initialArticle: any;
 }
 
-export default function BlogDetailPageClient({ slug, staticArticle }: BlogDetailPageClientProps) {
+export default function BlogDetailPageClient({ slug, initialArticle }: BlogDetailPageClientProps) {
     const container = useRef<HTMLDivElement>(null);
-    const [supabaseArticle, setSupabaseArticle] = useState<any | null>(null);
-    const [isLoading, setIsLoading] = useState(true);
+    const [activeArticle, setActiveArticle] = useState<any | null>(initialArticle);
+    const [isLoading, setIsLoading] = useState(!initialArticle);
+    const [shareText, setShareText] = useState("Share");
 
-    // Dynamic Database Query via Supabase with graceful client-side fallbacks
+    const handleShare = async () => {
+        if (typeof window === "undefined") return;
+        if (navigator.share) {
+            try {
+                await navigator.share({
+                    title: activeArticle?.title,
+                    text: activeArticle?.excerpt || "Check out this technical dispatch from Aqua Stone Industries.",
+                    url: window.location.href,
+                });
+                return;
+            } catch (err) {
+                // Fail silently or fallback
+            }
+        }
+
+        try {
+            await navigator.clipboard.writeText(window.location.href);
+            setShareText("Copied!");
+            setTimeout(() => setShareText("Share"), 2000);
+        } catch (err) {
+            console.warn("Could not copy page URL:", err);
+        }
+    };
+
+    const handlePrint = () => {
+        if (typeof window !== "undefined") {
+            window.print();
+        }
+    };
+
+    // Dynamic Database Query via Supabase with client-side fallback if not pre-fetched
     useEffect(() => {
+        if (initialArticle) {
+            setActiveArticle(initialArticle);
+            setIsLoading(false);
+            return;
+        }
+
         async function fetchArticle() {
             try {
                 setIsLoading(true);
@@ -33,32 +72,30 @@ export default function BlogDetailPageClient({ slug, staticArticle }: BlogDetail
                     .select("*")
                     .eq("id", slug)
                     .single();
-                    
+
                 if (data && !error) {
-                    setSupabaseArticle({
+                    setActiveArticle({
                         title: data.title,
                         category: data.category,
                         author: data.author,
                         date: data.date,
                         readTime: data.read_time,
                         image: data.image,
-                        nextSlug: "evolution-of-polymer", 
-                        nextTitle: "Why Projects Abandon Traditional Cement",
-                        prevSlug: "swimming-pool-tiling",
-                        prevTitle: "Pool Mosaic Installation Guide",
+                        nextSlug: null,
+                        nextTitle: null,
+                        prevSlug: null,
+                        prevTitle: null,
                         content: data.content
                     });
                 }
             } catch (err) {
-                console.warn("Supabase fetch bypassed. Fallback active.", err);
+                console.warn("Client-side Supabase fetch failed:", err);
             } finally {
                 setIsLoading(false);
             }
         }
         fetchArticle();
-    }, [slug]);
-
-    const activeArticle = supabaseArticle || staticArticle;
+    }, [slug, initialArticle]);
 
     useGSAP(() => {
         if (isLoading) return;
@@ -82,7 +119,16 @@ export default function BlogDetailPageClient({ slug, staticArticle }: BlogDetail
         });
     }, { scope: container, dependencies: [isLoading] });
 
-    if (!activeArticle) notFound();
+    if (!activeArticle && !isLoading) notFound();
+
+    if (isLoading) {
+        return (
+            <div className="bg-[#FAF9F6] min-h-screen flex flex-col items-center justify-center text-center space-y-4">
+                <div className="w-8 h-8 border-2 border-brand-950 border-t-transparent animate-spin rounded-none" />
+                <span className="text-[10px] font-mono uppercase tracking-[0.25em] text-slate-400">Loading Technical Dispatch...</span>
+            </div>
+        );
+    }
 
     return (
         <div ref={container} className="bg-[#FAF9F6] min-h-screen pb-32 text-brand-900 font-sans selection:bg-brand-900 selection:text-white pt-28">
@@ -114,14 +160,17 @@ export default function BlogDetailPageClient({ slug, staticArticle }: BlogDetail
                     <img
                         src={activeArticle.image}
                         alt={activeArticle.title}
-                        className="parallax-bg absolute inset-0 w-full h-[120%] -top-[10%] object-cover object-center grayscale"
+                        onError={(e) => {
+                            e.currentTarget.src = FALLBACK_IMAGE;
+                        }}
+                        className="parallax-bg absolute inset-0 w-full h-[120%] -top-[10%] object-cover object-center"
                     />
                 </div>
             </div>
 
             {/* Premium Editorial Grid Layout */}
             <div className="post-content-container max-w-[1200px] mx-auto px-6 sm:px-12 grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-16 items-start">
-                
+
                 {/* ================= LEFT COLUMN: Editorial Text ================= */}
                 <div className="lg:col-span-8 space-y-8">
                     <div
@@ -141,8 +190,8 @@ export default function BlogDetailPageClient({ slug, staticArticle }: BlogDetail
                     <div className="mt-24 pt-12 border-t border-slate-200 grid grid-cols-1 md:grid-cols-2 gap-6">
                         {/* Prev Article Card */}
                         {activeArticle.prevSlug && (
-                            <Link 
-                                href={`/blog/${activeArticle.prevSlug}`} 
+                            <Link
+                                href={`/blog/${activeArticle.prevSlug}`}
                                 className="group p-5 sm:p-6 border border-slate-200 bg-white hover:border-brand-950 transition-all flex flex-col justify-between rounded-none min-h-[145px] cursor-pointer"
                             >
                                 <div>
@@ -156,8 +205,8 @@ export default function BlogDetailPageClient({ slug, staticArticle }: BlogDetail
                         )}
                         {/* Next Article Card */}
                         {activeArticle.nextSlug && (
-                            <Link 
-                                href={`/blog/${activeArticle.nextSlug}`} 
+                            <Link
+                                href={`/blog/${activeArticle.nextSlug}`}
                                 className="group p-5 sm:p-6 border border-slate-200 bg-brand-950 hover:border-brand-500 hover:bg-brand-900 transition-all flex flex-col justify-between rounded-none text-white min-h-[145px] cursor-pointer"
                             >
                                 <div>
@@ -174,7 +223,7 @@ export default function BlogDetailPageClient({ slug, staticArticle }: BlogDetail
 
                 {/* ================= RIGHT COLUMN: Sticky Editorial Sidebar ================= */}
                 <div className="lg:col-span-4 sticky top-32 space-y-8 hidden lg:block border-l border-slate-200 pl-8">
-                    
+
                     {/* Author Meta */}
                     <div className="space-y-3 pb-6 border-b border-slate-200">
                         <span className="text-[9px] font-mono text-slate-400 uppercase tracking-[0.25em] block">PUBLISHED BY</span>
@@ -192,7 +241,7 @@ export default function BlogDetailPageClient({ slug, staticArticle }: BlogDetail
                     {/* Scientific Document Spec Details */}
                     <div className="space-y-4 pb-6 border-b border-slate-200">
                         <span className="text-[9px] font-mono text-slate-400 uppercase tracking-[0.25em] block">METRICS BRIEF</span>
-                        
+
                         <div className="grid grid-cols-2 gap-4">
                             <div>
                                 <span className="block text-[9px] text-slate-400 font-mono uppercase">Category</span>
@@ -223,13 +272,19 @@ export default function BlogDetailPageClient({ slug, staticArticle }: BlogDetail
                     {/* Document Sharing Actions */}
                     <div className="space-y-3 pt-2">
                         <span className="text-[9px] font-mono text-slate-400 uppercase tracking-[0.25em] block">HUB ACTIONS</span>
-                        
+
                         <div className="flex items-center gap-2">
-                            <button className="flex-1 w-10 h-10 border border-slate-200 flex items-center justify-center hover:bg-brand-950 hover:text-white transition-colors rounded-none gap-2 font-mono text-[10px] uppercase tracking-wider text-slate-500 cursor-pointer">
-                                <Share2 className="w-4 h-4" /> Share
+                            <button
+                                onClick={handleShare}
+                                className="flex-1 w-10 h-10 border border-slate-200 flex items-center justify-center hover:bg-brand-950 hover:text-white transition-colors rounded-none gap-2 font-mono text-[10px] uppercase tracking-wider text-slate-500 cursor-pointer"
+                            >
+                                <Share2 className="w-4 h-4" /> {shareText}
                             </button>
-                            <button className="flex-1 w-10 h-10 border border-slate-200 flex items-center justify-center hover:bg-brand-950 hover:text-white transition-colors rounded-none gap-2 font-mono text-[10px] uppercase tracking-wider text-slate-500 cursor-pointer">
-                                <Printer className="w-4 h-4" /> Print
+                            <button
+                                onClick={handlePrint}
+                                className="flex-1 w-10 h-10 border border-slate-200 flex items-center justify-center hover:bg-brand-950 hover:text-white transition-colors rounded-none gap-2 font-mono text-[10px] uppercase tracking-wider text-slate-500 cursor-pointer"
+                            >
+                                <Printer className="w-4 h-4" /> Print / Save PDF
                             </button>
                         </div>
                     </div>
